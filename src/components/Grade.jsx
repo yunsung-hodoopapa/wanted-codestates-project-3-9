@@ -39,8 +39,7 @@ export default Grade;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
-  margin: auto;
+  margin: 15px 0px;
 `;
 
 const Stars = styled.div`
@@ -49,7 +48,7 @@ const Stars = styled.div`
   justify-content: center;
 
   & svg {
-    color: gray;
+    color: #cccccc;
     cursor: pointer;
   }
 
@@ -58,7 +57,7 @@ const Stars = styled.div`
   }
 
   & svg:hover ~ svg {
-    color: gray;
+    color: #cccccc;
   }
 
   .blackStar {
