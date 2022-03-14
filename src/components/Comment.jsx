@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { comment } from '../knkRedux/actions';
 
-const comments = [
-  {
-    commentId: '9bed8c34-9ab9-11ec-b909-0242ac120002',
-    comment: '내부 수납공간은 어떤가요?',
-  },
-  {
-    commentId: '9bed8acc-9ab9-11ec-b909-0242ac120002',
-    comment: '크기에 비해서 수납공간이 많은 것 같아요!',
-  },
-  {
-    commentId: '9bed891e-9ab9-11ec-b909-0242ac120002',
-    comment: '감사합니다~!',
-  },
-];
+// const comments = [
+//   {
+//     commentId: '9bed8c34-9ab9-11ec-b909-0242ac120002',
+//     comment: '내부 수납공간은 어떤가요?',
+//   },
+//   {
+//     commentId: '9bed8acc-9ab9-11ec-b909-0242ac120002',
+//     comment: '크기에 비해서 수납공간이 많은 것 같아요!',
+//   },
+//   {
+//     commentId: '9bed891e-9ab9-11ec-b909-0242ac120002',
+//     comment: '감사합니다~!',
+//   },
+// ];
 
 const Comment = () => {
+  const dispatch = useDispatch();
+  const inputText = useRef();
+  const data = useSelector(state => state);
+  const matchData = id => data?.filter(item => item.id === id);
+  const commentData = matchData('373189c2-9ab8-11ec-b909-0242ac120002')[0]
+    .comments;
+
+  const addComment = () => {
+    dispatch(
+      comment(
+        '373189c2-9ab8-11ec-b909-0242ac120002',
+        'userId',
+        inputText.current.value,
+      ),
+    );
+    inputText.current.value = '';
+  };
+
   return (
     <Wrap>
       <CommentUl>
-        {comments.map((item, index) => {
+        {commentData.map((item, index) => {
           return (
             <li key={index}>
               <div>
@@ -33,8 +54,10 @@ const Comment = () => {
         })}
       </CommentUl>
       <Input>
-        <input type="text" placeholder="댓글을 입력해주세요." />
-        <button type="button">게시</button>
+        <input ref={inputText} type="text" placeholder="댓글을 입력해주세요." />
+        <button onClick={addComment} type="button">
+          게시
+        </button>
       </Input>
     </Wrap>
   );
