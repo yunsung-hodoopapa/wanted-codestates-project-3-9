@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { useState } from 'react';
 // import PropTypes from 'prop-types';
 
-const ImageRegist = () => {
+const ImageRegister = () => {
   const [image, setImage] = useState(null);
   const handleImage = e => {
     setImage(URL.createObjectURL(e.target.files[0]));
   };
-
+  console.log(image);
   return (
     <div>
       {image ? (
@@ -32,12 +32,11 @@ const ImageRegist = () => {
   );
 };
 
-// ImageRegist.propTypes = {};
+// ImageRegister.propTypes = {};
 
 const Label = styled.label`
   display: grid;
   justify-content: center;
-  align-items: center;
   margin-top: 100px;
 `;
 
@@ -46,8 +45,6 @@ const UploadButton = styled.div`
   color: white;
   text-align: center;
   line-height: 60px;
-  justify-content: center;
-  align-items: center;
   width: 400px;
   height: 60px;
   border-radius: 5px;
@@ -64,4 +61,4 @@ const ImageConatiner = styled.div`
   height: 500px;
 `;
 
-export default ImageRegist;
+export default ImageRegister;

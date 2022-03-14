@@ -1,10 +1,12 @@
 import React from 'react';
-import ImageRegist from './components/ImageRegist';
+import ImageRegister from './components/ImageRegister';
+import Grade from './components/Grade';
 
 const App = () => {
   return (
     <div className="App">
-      <ImageRegist />
+      <ImageRegister />
+      <Grade />
     </div>
   );
 };
