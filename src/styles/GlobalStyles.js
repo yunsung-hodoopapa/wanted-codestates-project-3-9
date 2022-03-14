@@ -6,6 +6,9 @@ const GlobalStyles = createGlobalStyle`
     ${reset}
 
     :root {
+        body {
+            background-color:#f9f9f9;
+        }
     }
 `;
 
