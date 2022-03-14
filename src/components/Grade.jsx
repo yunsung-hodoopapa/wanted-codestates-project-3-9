@@ -1,20 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
 import ReviewTitle from './ReviewTitle';
+import PropTypes from 'prop-types';
 const ARRAY = [0, 1, 2, 3, 4];
 
-function Grade() {
-  const [clicked, setClicked] = useState([false, false, false, false, false]);
-
-  const handleStarClick = index => {
-    let clickStates = [...clicked];
-    for (let i = 0; i < 5; i++) {
-      clickStates[i] = i <= index ? true : false;
-    }
-    setClicked(clickStates);
-  };
-
+function Grade({ clicked, clickGrade }) {
   return (
     <Wrap>
       <ReviewTitle title={'평점'} />
@@ -24,7 +15,7 @@ function Grade() {
             <FaStar
               key={idx}
               size="50"
-              onClick={() => handleStarClick(el)}
+              onClick={() => clickGrade(el)}
               className={clicked[el] && 'blackStar'}
             />
           );
@@ -33,7 +24,10 @@ function Grade() {
     </Wrap>
   );
 }
-
+Grade.propTypes = {
+  clicked: PropTypes.array,
+  clickGrade: PropTypes.func,
+};
 export default Grade;
 
 const Wrap = styled.div`

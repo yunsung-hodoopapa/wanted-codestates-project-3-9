@@ -1,23 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Grade from '../components/Grade';
 import ReviewTitle from '../components/ReviewTitle';
 import ImageRegister from '../components/ImageRegister';
 const Review = () => {
+  const [data, setData] = useState({
+    clicked: [false, false, false, false, false],
+  });
+  const changeTitle = ({ target }) =>
+    setData({ ...data, ...{ title: target.value } });
+  const changeContent = ({ target }) =>
+    setData({ ...data, ...{ content: target.value } });
+
+  const handleStarClick = index => {
+    let clickStates = [...data.clicked];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] = i <= index ? true : false;
+    }
+    setData({ ...data, ...{ clicked: clickStates } });
+  };
+  console.log(data);
   return (
     <ReviewContainer>
       <ReviewTitle titleName={'제목'} />
       <TitleInput
         type="text"
         placeholder="리뷰 제목을 입력해주세요"
+        onChange={changeTitle}
+        value={data?.title || ''}
       ></TitleInput>
       <ReviewTitle titleName={'내용'} />
       <ContentArea
         type="text"
         placeholder="리뷰 내용을 입력해주세요"
+        onChange={changeContent}
+        value={data?.content || ''}
       ></ContentArea>
       <ImageRegister />
-      <Grade />
+      <Grade
+        clicked={data.clicked}
+        clickGrade={index => handleStarClick(index)}
+      />
       <SubmitContainer>
         <SubmitBtn>리뷰 등록하기</SubmitBtn>
       </SubmitContainer>
@@ -28,6 +51,7 @@ const Review = () => {
 const ReviewContainer = styled.div`
   margin: auto;
   width: 500px;
+  height: 1000px;
 `;
 
 const TitleInput = styled.input`
