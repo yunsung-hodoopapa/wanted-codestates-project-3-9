@@ -1,22 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const ImageRegister = () => {
-  const [image, setImage] = useState({ preview: '', raw: '' });
-
+const ImageRegister = ({ changePhoto }) => {
+  const [image, setImage] = useState(null); // preview 이미지
+  const reader = new FileReader();
   const handleImage = e => {
-    setImage({
-      preview: URL.createObjectURL(e.target.files[0]),
-      raw: e.target.files[0],
-    });
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setImage(reader.result); // preview 이미지 설정
+      changePhoto(reader.result);
+    };
   };
   return (
     <div>
-      {image.preview ? (
+      {image ? (
         <ImageConatiner>
-          <img width="500px" height="500px" src={image.preview} />
+          <img width="500px" height="500px" src={image} />
         </ImageConatiner>
       ) : null}
       <Label>
@@ -35,7 +36,9 @@ const ImageRegister = () => {
   );
 };
 
-// ImageRegister.propTypes = {};
+ImageRegister.propTypes = {
+  changePhoto: PropTypes.func,
+};
 
 const Label = styled.label`
   display: grid;
