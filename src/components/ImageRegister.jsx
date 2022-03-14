@@ -4,16 +4,20 @@ import { useState } from 'react';
 // import PropTypes from 'prop-types';
 
 const ImageRegister = () => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState({ preview: '', raw: '' });
+
   const handleImage = e => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    setImage({
+      preview: URL.createObjectURL(e.target.files[0]),
+      raw: e.target.files[0],
+    });
   };
-  console.log(image);
+  console.log('image : ', image);
   return (
     <div>
-      {image ? (
+      {image.preview ? (
         <ImageConatiner>
-          <img width="500px" height="500px" src={image} />{' '}
+          <img width="500px" height="500px" src={image.preview} />
         </ImageConatiner>
       ) : null}
       <Label>
