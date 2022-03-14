@@ -12,7 +12,6 @@ const ImageRegister = () => {
       raw: e.target.files[0],
     });
   };
-  console.log('image : ', image);
   return (
     <div>
       {image.preview ? (

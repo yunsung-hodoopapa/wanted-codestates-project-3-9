@@ -1,12 +1,9 @@
 import React from 'react';
-import ImageRegister from './components/ImageRegister';
-import Grade from './components/Grade';
-
+import Review from './pages/Review';
 const App = () => {
   return (
     <div className="App">
-      <ImageRegister />
-      <Grade />
+      <Review />
     </div>
   );
 };
