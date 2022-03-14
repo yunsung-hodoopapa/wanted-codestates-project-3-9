@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
-
+import ReviewTitle from './ReviewTitle';
 const ARRAY = [0, 1, 2, 3, 4];
 
 function Grade() {
@@ -17,7 +17,7 @@ function Grade() {
 
   return (
     <Wrap>
-      <RatingText>평가하기</RatingText>
+      <ReviewTitle title={'평점'} />
       <Stars>
         {ARRAY.map((el, idx) => {
           return (
@@ -39,18 +39,14 @@ export default Grade;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 15px;
-`;
-
-const RatingText = styled.div`
-  color: #787878;
-  font-size: 12px;
-  font-weight: 400;
+  width: 500px;
+  margin: auto;
 `;
 
 const Stars = styled.div`
   display: flex;
-  padding-top: 5px;
+  margin: 10px;
+  justify-content: center;
 
   & svg {
     color: gray;
