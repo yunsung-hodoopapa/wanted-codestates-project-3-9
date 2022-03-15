@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import Grade from '../components/Grade';
 import ReviewTitle from '../components/ReviewTitle';
 import ImageRegister from '../components/ImageRegister';
+import { addPost } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 const Review = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   /*
+  
   {
     id: '1',
     productNm: '블랙 핸드백',
@@ -19,7 +25,7 @@ const Review = () => {
   },
   */
   const [data, setData] = useState({
-    clicked: [true, false, false, false, false],
+    clicked: [false, false, false, false, false],
     likeCnt: 0,
     comments: [],
   });
@@ -27,7 +33,7 @@ const Review = () => {
     setData({ ...data, ...{ productNm: target.value } });
   const changeContent = ({ target }) =>
     setData({ ...data, ...{ review: target.value } });
-  const changePhoto = image => setData({ ...data, ...{ productImg: image } });
+  const changePhoto = image => setData({ ...data, ...{ productImg: [image] } });
 
   const handleStarClick = index => {
     let clickStates = [...data.clicked];
@@ -49,6 +55,23 @@ const Review = () => {
       ...{ reviewRate: clickStates },
       ...{ id: Math.ceil(Math.random() * 10000000).toString() },
     });
+
+    const isValid = newData => {
+      return newData.productNm && newData.review && newData.productImg;
+    };
+    if (isValid(newData)) {
+      dispatch(
+        addPost({
+          ...newData,
+          ...{ createDt: new Date().valueOf() },
+          ...{ reviewRate: clickStates },
+          ...{ id: Math.ceil(Math.random() * 10000000).toString() },
+        }),
+      );
+      navigate('/');
+    } else {
+      alert('유효한 값들을 입력해주세요');
+    }
 
     // Todo : dispatch로 상태 추가하고 navigate로 첫화면으로 옮기기
   };
