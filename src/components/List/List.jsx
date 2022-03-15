@@ -1,19 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import { data } from '../../model/data';
+import { useSelector, useDispatch } from 'react-redux';
 import LikeButton from './LikeButton';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { toggleLikeButton } from '../../redux/actions';
 
 const List = () => {
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.interaction.data);
+
+  const clickLikeBtn = (id) => {
+    dispatch(toggleLikeButton(id));
+  };
+
   return (
     <ListWrap>
-      {data.map((item, index) => {
+      {data.map(item => {
         const { id, productNm, productImg, reviewRate, likeCnt, review } = item;
         return (
           <ContentsContainer key={id}>
             <Image src={`${productImg}`} />
             <InfoContainer>
               <LabelWrapper>
-                <BsHandThumbsUp />
                 <span>{likeCnt}</span>
               </LabelWrapper>
               <LabelWrapper>
@@ -52,6 +61,10 @@ const Image = styled.div`
   background-image: url(${props => props.src});
 `;
 
+const LabelWrapper = styled.div`
+  display: flex;
+`;
+
 const InfoContainer = styled.div`
   width: 100%;
   height: 150px;
@@ -59,14 +72,6 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const LabelWrapper = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-  h2 {
-    font-weight: 800;
-  }
 `;
 
 export default List;
