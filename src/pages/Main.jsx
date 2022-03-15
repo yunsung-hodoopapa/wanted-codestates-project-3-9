@@ -22,14 +22,15 @@ const Main = () => {
 
   const handleChange = e => {
     if (e.target.matches('.grid')) {
-      console.log('grid');
       setActive('grid');
     } else {
-      console.log('list');
       setActive('list');
     }
     dispatch(resetData());
   };
+
+  useEffect(() => {
+  }, [active]);
 
   return (
     <MainComponent>
