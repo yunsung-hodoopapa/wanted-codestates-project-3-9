@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
-import List from '../components/List';
+import List from '../components/List/List';
 import { data } from '../model/data';
 import styled from 'styled-components';
 
@@ -21,7 +21,8 @@ const Main = () => {
       <Header />
       <Tab />
       <Filter dataList={dataList} setDataList={setDataList} data={data} />
-      <List dataList={dataList} />
+      {/* <List dataList={dataList} /> */}
+      <List />
     </MainComponent>
   );
 };

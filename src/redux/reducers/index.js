@@ -5,7 +5,7 @@ import { interactionReducer } from './interaction';
 
 const rootReducer = combineReducers({
   comment: commentReducer,
-  // interaction: interactionReducer,
+  interaction: interactionReducer,
 });
 
 export default rootReducer;

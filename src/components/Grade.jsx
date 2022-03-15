@@ -14,7 +14,6 @@ function Grade({ clicked, clickGrade }) {
           return (
             <FaStar
               key={idx}
-              size="50"
               onClick={() => clickGrade(el)}
               className={clicked[el] && 'blackStar'}
             />
@@ -27,6 +26,7 @@ function Grade({ clicked, clickGrade }) {
 Grade.propTypes = {
   clicked: PropTypes.array,
   clickGrade: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 export default Grade;
 

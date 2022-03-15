@@ -3,32 +3,38 @@ import { TOGGLE_LIKE } from '../actions';
 
 const initialState = {
   data,
-  isClicked: false,
 };
 
 export const interactionReducer = (state = initialState, action) => {
-  // if (action.type === TOGGLE_LIKE) {
-  //     return state.data.map(item => {
-  //       if (item.id === action.id) {
-  //         if (item.isClicked === false) {
-  //           return {
-  //             ...item,
-  //             likeCnt: item.likeCnt + 1,
-  //             isClicked: true,
-  //           };
-  //         } else {
-  //           return {
-  //             ...item,
-  //             likeCnt: item.likenCnt - 1,
-  //             isClicked: false,
-  //           };
-  //         }
-  //       } else {
-  //         return item;
-  //       }
-  //     });
-  //   }
-  //   default:
-  //     return state;
-  // }
+  switch (action.type) {
+    case TOGGLE_LIKE: {
+      const updatedData = state.data.map(item => {
+        if (item.id === action.id) {
+          if (item.isClicked === true) {
+            console.log('here2');
+            return {
+              ...item,
+              likeCnt: Number(item.likeCnt) - 1,
+              isClicked: false,
+            };
+          } else {
+            console.log('here3');
+            return {
+              ...item,
+              likeCnt: Number(item.likeCnt) + 1,
+              isClicked: true,
+            };
+          }
+        } else {
+          return item;
+        }
+      });
+      return {
+        ...state,
+        data: updatedData,
+      };
+    }
+    default:
+      return state;
+  }
 };
