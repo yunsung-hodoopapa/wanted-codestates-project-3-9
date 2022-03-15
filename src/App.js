@@ -1,15 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
-// import ImageRegister from './components/ImageRegister';
-// import Grade from './components/Grade';
+import DetailView from './pages/DetailView';
 
 const App = () => {
   return (
-    <div className="App">
-      <Main />
-      {/* <ImageRegister />
-      <Grade /> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/detailView" element={<DetailView />} />
+        {/* <Route path="/review/id" elemeent={<Review />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 };
 

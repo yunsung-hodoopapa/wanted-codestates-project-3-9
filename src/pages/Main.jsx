@@ -3,7 +3,7 @@ import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
 import List from '../components/List';
-import data from '../model/data';
+import { data } from '../model/data';
 import styled from 'styled-components';
 
 const MainComponent = styled.main`
@@ -25,5 +25,20 @@ const Main = () => {
     </MainComponent>
   );
 };
+
+const MainWrap = styled.div`
+  background-color: #f7f6fb;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const MainContainer = styled.div`
+  width: 500px;
+  background-color: #fffff;
+`;
 
 export default Main;
