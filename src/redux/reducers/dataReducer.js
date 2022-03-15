@@ -5,6 +5,7 @@ import {
   SORT_BY_LIKE,
   SORT_BY_COMMENT,
   SORT_BY_RANDOM,
+  ADD_COMMENT,
 } from '../actions';
 import { initialState } from './initialState';
 
@@ -53,6 +54,24 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         data,
       };
+    }
+    case ADD_COMMENT: {
+      return state.map(item => {
+        if (item.id === action.id) {
+          return {
+            ...item,
+            comments: [
+              ...item.comments,
+              {
+                commentId: action.userId,
+                comment: action.text,
+                commentDt: action.date,
+              },
+            ],
+          };
+        }
+        return item;
+      });
     }
     default: {
       return state;

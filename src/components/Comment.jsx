@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { comment } from '../redux/actions';
+import { dataReducer } from '../redux/reducers/dataReducer';
 
-const Comment = ({ id }) => {
+const Comment = ({ id, commentData }) => {
   const dispatch = useDispatch();
   const inputText = useRef();
-  const commentData = useSelector(state => state.comment);
+  const data = useSelector(state => state.comment);
 
   const addComment = () => {
     const nowDate = new Date().getTime();
-    dispatch(comment(id, 'userId', inputText.current.value, nowDate));
+    dispatch(dataReducer(id, 'userId', inputText.current.value, nowDate));
     inputText.current.value = '';
   };
 
@@ -38,17 +38,15 @@ const Comment = ({ id }) => {
     <Wrap>
       <CommentUl>
         {commentData.map((item, index) => {
-          if (item.id === id) {
-            return (
-              <li key={index}>
-                <div>
-                  <UserId>{item.commentId}</UserId>
-                  <p>{item.comment}</p>
-                </div>
-                <span>{elapsedTime(item.commentDt)}</span>
-              </li>
-            );
-          }
+          return (
+            <li key={index}>
+              <div>
+                <UserId>{item.commentId}</UserId>
+                <p>{item.comment}</p>
+              </div>
+              <span>8 분전</span>
+            </li>
+          );
         })}
       </CommentUl>
       <Input>

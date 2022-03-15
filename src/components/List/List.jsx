@@ -59,6 +59,7 @@ const List = ({ dataList }) => {
     }
     return () => observer && observer.disconnect();
   }, [target]);
+  console.log(dataList);
 
   return (
     <Wrapper>
@@ -101,7 +102,7 @@ const List = ({ dataList }) => {
               <h2>{productNm}</h2>
               <p>{review}</p>
             </InfoContainer>
-            <Comment commentData={comments} id={id} />
+            {/* <Comment commentData={comments} id={id} /> */}
             <div ref={setTarget} />
           </ContentsContainer>
         );
