@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +21,7 @@ const Grid = () => {
   }));
 
   useEffect(() => {
-    if (data.length <= length) {
+    if (data.length === length) {
       alert('모든 데이터를 불러왔습니다.');
       setIsLoaded(false);
     }
@@ -65,8 +64,6 @@ const Grid = () => {
     </Wrapper>
   );
 };
-
-Grid.propTypes = {};
 
 const Wrapper = styled.div`
   flex-direction: column;

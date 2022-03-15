@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
-import List from '../components/List/List';
+import List from '../components/List';
 import Grid from '../components/Grid';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetData } from '../redux/actions';
 
 const MainComponent = styled.main`
   max-width: 500px;
@@ -15,20 +16,20 @@ const MainComponent = styled.main`
 `;
 
 const Main = () => {
-  const data = useSelector(state => state.interaction.data);
+  const data = useSelector(state => state.data.data);
+  const dispatch = useDispatch();
   const [active, setActive] = useState('grid');
 
   const handleChange = e => {
     if (e.target.matches('.grid')) {
+      console.log('grid');
       setActive('grid');
     } else {
+      console.log('list');
       setActive('list');
     }
+    dispatch(resetData());
   };
-
-  useEffect(() => {
-    console.log('리랜더링');
-  }, [data]);
 
   return (
     <MainComponent>

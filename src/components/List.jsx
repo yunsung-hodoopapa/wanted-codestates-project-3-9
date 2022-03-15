@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
-import { toggleLikeButton } from '../../redux/actions';
-import Grade from '../Grade';
-import Comment from '../Comment';
-import { data } from '../../model/data';
-import { exactPathCopy } from '../../util/index';
+import { toggleLikeButton, getData } from '../redux/actions';
+import Grade from './Grade';
+import Comment from './Comment';
+import { exactPathCopy } from '../util/index';
 
-const List = ({ dataList }) => {
+const defaultOption = {
+  root: null,
+  threshold: 0.5,
+  rootMargin: '0px',
+};
+
+const List = () => {
   const dispatch = useDispatch();
   const [target, setTarget] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
+  const { data, length } = useSelector(state => ({
+    length: state.data.length,
+    data: state.data.data,
+  }));
 
   const clickLikeBtn = id => {
     dispatch(toggleLikeButton(id));
@@ -26,44 +34,33 @@ const List = ({ dataList }) => {
     return initClicked;
   };
 
-  const addItems = () => {
-    if (dataList.length === data.length) {
-      alert('더 이상 불러올 데이터가 없습니다.');
-      setIsLoaded(false);
-      return;
-    }
-    setIsLoaded(true);
-    // setDataList(data.slice(0, );
-    setIsLoaded(false);
-  };
-
   const onIntersect = ([entry], observer) => {
-    if (entry.isIntersecting && !isLoaded) {
-      console.log('check', entry.isIntersecting);
+    if (entry.isIntersecting) {
       observer.unobserve(entry.target);
-      addItems();
+      dispatch(getData());
       observer.observe(entry.target);
     }
   };
 
   useEffect(() => {
+    if (data.length === length) {
+      alert('모든 데이터를 불러왔습니다.');
+      setIsLoaded(false);
+    }
+  }, [length]);
+
+  useEffect(() => {
     let observer;
-    const defaultOption = {
-      root: null,
-      threshold: 0.5,
-      rootMargin: '0px',
-    };
     if (target) {
       observer = new IntersectionObserver(onIntersect, defaultOption);
       observer.observe(target);
     }
     return () => observer && observer.disconnect();
   }, [target]);
-  console.log(dataList);
 
   return (
     <Wrapper>
-      {dataList.map(item => {
+      {data.slice(0, length).map(item => {
         const {
           id,
           productNm,
@@ -102,11 +99,11 @@ const List = ({ dataList }) => {
               <h2>{productNm}</h2>
               <p>{review}</p>
             </InfoContainer>
-            {/* <Comment commentData={comments} id={id} /> */}
-            <div ref={setTarget} />
+            <Comment userId={id} />
           </ContentsContainer>
         );
       })}
+      {isLoaded && <div ref={setTarget} className="Target-Element"></div>}
     </Wrapper>
   );
 };
@@ -153,9 +150,5 @@ const Like = styled.div`
     margin-right: 5px;
   }
 `;
-
-List.propTypes = {
-  dataList: PropTypes.array,
-};
 
 export default List;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
@@ -11,7 +11,7 @@ import { copy } from '../util';
 
 const DetailView = () => {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.interaction.data);
+  const data = useSelector(state => state.data.data);
   const location = useLocation();
   const path = location.pathname.split('/');
   const pageId = path[path.length - 1];
@@ -30,6 +30,10 @@ const DetailView = () => {
 
   const { id, productNm, productImg, reviewRate, likeCnt, review, isClicked } =
     data.find(item => item.id === pageId);
+
+  useEffect(() => {
+    console.log('데이터 변화감지');
+  }, [data]);
 
   return (
     <Wrapper>
@@ -58,7 +62,7 @@ const DetailView = () => {
           <h2>{productNm}</h2>
           <p>{review}</p>
         </InfoContainer>
-        {/* <Comment id={id} /> */}
+        <Comment userId={id} />
       </ContentsContainer>
     </Wrapper>
   );

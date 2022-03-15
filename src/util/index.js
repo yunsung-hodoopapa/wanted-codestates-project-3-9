@@ -11,7 +11,7 @@ export const copy = () => {
 export const exactPathCopy = path => {
   const el = document.createElement('input');
   const mainAddress = window.location.href;
-  const query = `/detail/${path}`;
+  const query = `detail/${path}`;
   el.value = `${mainAddress}${query}`;
   console.log(el.value);
   document.body.appendChild(el);

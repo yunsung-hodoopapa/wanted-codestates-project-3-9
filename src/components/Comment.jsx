@@ -1,20 +1,25 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { dataReducer } from '../redux/reducers/dataReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { addComment } from '../redux/actions';
 
-const Comment = ({ id, commentData }) => {
+const Comment = userId => {
   const dispatch = useDispatch();
   const inputText = useRef();
-  const data = useSelector(state => state.comment);
+  const data = useSelector(state => state.data.data);
 
-  const addComment = () => {
+  const updateComment = () => {
     const nowDate = new Date().getTime();
-    dispatch(dataReducer(id, 'userId', inputText.current.value, nowDate));
+    dispatch(
+      addComment(userId.userId, 'userId', inputText.current.value, nowDate),
+    );
     inputText.current.value = '';
   };
+
+  const matched = data.filter(item => item.id === userId.userId)[0];
+
+  const { comments } = matched;
 
   const elapsedTime = date => {
     const nowDate = new Date().getTime();
@@ -36,22 +41,23 @@ const Comment = ({ id, commentData }) => {
 
   return (
     <Wrap>
-      <CommentUl>
-        {commentData.map((item, index) => {
-          return (
-            <li key={index}>
+      {comments.map(item => {
+        const { commentId, comment, commentDt } = item;
+        return (
+          <CommentUl key={commentId}>
+            <li key={commentId}>
               <div>
-                <UserId>{item.commentId}</UserId>
-                <p>{item.comment}</p>
+                <UserId>{commentId}</UserId>
+                <p>{comment}</p>
               </div>
-              <span>8 분전</span>
+              <span>{elapsedTime(commentDt)}</span>
             </li>
-          );
-        })}
-      </CommentUl>
+          </CommentUl>
+        );
+      })}
       <Input>
         <input ref={inputText} type="text" placeholder="댓글을 입력해주세요." />
-        <button onClick={addComment} type="button">
+        <button onClick={updateComment} type="button">
           게시
         </button>
       </Input>
