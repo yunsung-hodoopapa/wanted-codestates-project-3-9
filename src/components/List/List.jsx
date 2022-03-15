@@ -73,29 +73,23 @@ const List = ({ dataList }) => {
         } = item;
         return (
           <ContentsContainer key={id}>
-            <img src={`${productImg}`} />
+            <img src={productImg} alt={productNm} />
             <InfoContainer>
-              <LabelWrapper>
-                <span onClick={() => clickLikeBtn(id)}>
+              <Like onClick={() => clickLikeBtn(id)}>
+                <i>
                   {isClicked ? (
                     <AiFillHeart color="red" size={18} />
                   ) : (
                     <AiOutlineHeart size={18} />
                   )}
-                  {likeCnt}
-                </span>
-              </LabelWrapper>
-              <LabelWrapper>
+                </i>
+                <span>{likeCnt}</span>
+              </Like>
+              <i>
                 <Grade clicked={getStarfromRate(reviewRate)} size={15} />
-              </LabelWrapper>
-              <LabelWrapper>
-                <h2>{productNm}</h2>
-              </LabelWrapper>
-              <br />
-              <LabelWrapper>
-                <span>{review}</span>
-              </LabelWrapper>
-              <br />
+              </i>
+              <h2>{productNm}</h2>
+              <p>{review}</p>
             </InfoContainer>
             <Comment />
             <div ref={setTarget} />
@@ -108,7 +102,6 @@ const List = ({ dataList }) => {
 
 const Wrapper = styled.div`
   width: 500px;
-  overflow-y: scroll;
 `;
 
 const ContentsContainer = styled.div`
@@ -117,16 +110,31 @@ const ContentsContainer = styled.div`
   width: 100%;
 `;
 
-const LabelWrapper = styled.div`
-  display: flex;
-`;
-
 const InfoContainer = styled.div`
   width: 100%;
-  padding: 16px;
+  padding: 40px 16px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  i div {
+    display: block;
+    margin: 20px 0;
+  }
+  h2 {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  p {
+    line-height: 20px;
+  }
+`;
+
+const Like = styled.div`
+  i svg {
+    margin-bottom: -2px;
+    margin-right: 5px;
+  }
 `;
 
 List.propTypes = {
