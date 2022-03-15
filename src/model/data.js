@@ -1,4 +1,4 @@
-const data = [
+export const data = [
   {
     id: '1',
     productNm: '블랙 핸드백',
@@ -895,5 +895,3 @@ const data = [
     comments: [],
   },
 ];
-
-export default data;

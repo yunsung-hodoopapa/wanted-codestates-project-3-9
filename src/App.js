@@ -1,12 +1,17 @@
 import React from 'react';
-// import Main from './pages/Main';
-import Review from './pages/Review';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from './pages/Main';
+import DetailView from './pages/DetailView';
+
 const App = () => {
   return (
-    <div className="App">
-      {/* <Main /> */}
-      <Review />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/detailView" element={<DetailView />} />
+        {/* <Route path="/review/id" elemeent={<Review />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 };
 

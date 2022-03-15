@@ -22,7 +22,8 @@ import { comment } from '../knkRedux/actions';
 const Comment = () => {
   const dispatch = useDispatch();
   const inputText = useRef();
-  const data = useSelector(state => state);
+  const data = useSelector(state => state.comment.data);
+  console.log(data);
   const matchData = id => data?.filter(item => item.id === id);
   const commentData = matchData('373189c2-9ab8-11ec-b909-0242ac120002')[0]
     .comments;

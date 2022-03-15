@@ -1,4 +1,4 @@
-import data from '../../model/data';
+import { data } from '../../model/data';
 import { ADD_COMMENT } from '../actions';
 
 export const commentReducer = (state = data, action) => {
