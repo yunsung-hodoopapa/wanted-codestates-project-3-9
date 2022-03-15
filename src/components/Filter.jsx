@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -46,25 +46,17 @@ const Filter = ({ data, setDataList }) => {
     },
   ];
 
-  const copyData = [...data];
-
   const [tabNumber, setTabNumber] = useState(1);
-
-  useEffect(() => {
-    setDataList(copyData.sort((a, b) => b.createDt - a.createDt));
-  }, []);
 
   const handleFilter = (e, id) => {
     if (e.target.matches('.byDate')) {
-      setDataList(copyData.sort((a, b) => b.createDt - a.createDt));
+      setDataList(data.sort((a, b) => b.createDt - a.createDt));
     } else if (e.target.matches('.byLike')) {
-      setDataList(copyData.sort((a, b) => b.likeCnt - a.likeCnt));
+      setDataList(data.sort((a, b) => b.likeCnt - a.likeCnt));
     } else if (e.target.matches('.byComment')) {
-      setDataList(
-        copyData.sort((a, b) => b.comments.length - a.comments.length),
-      );
+      setDataList(data.sort((a, b) => b.comments.length - a.comments.length));
     } else if (e.target.matches('.byRandom')) {
-      setDataList(copyData.sort(() => Math.random() - 0.5));
+      setDataList(data.sort(() => Math.random() - 0.5));
     }
     setTabNumber(id);
   };
@@ -89,7 +81,6 @@ const Filter = ({ data, setDataList }) => {
 };
 
 Filter.propTypes = {
-  dataList: PropTypes.array,
   setDataList: PropTypes.func,
   data: PropTypes.array,
 };
