@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Filter from '../components/Filter';
+import Header from '../components/Header';
+import Tab from '../components/Tab';
+import List from '../components/List';
+import data from '../model/data';
+import styled from 'styled-components';
+
+const MainComponent = styled.main`
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 5px 0 20px 3px #f3f3f3, -5px 0 20px 3px #f3f3f3;
+`;
 
 const Main = () => {
-  return <div></div>;
+  const [dataList, setDataList] = useState([]);
+
+  return (
+    <MainComponent>
+      <Header />
+      <Tab />
+      <Filter dataList={dataList} setDataList={setDataList} data={data} />
+      <List dataList={dataList} />
+    </MainComponent>
+  );
 };
 
 export default Main;
