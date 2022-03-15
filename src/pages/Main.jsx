@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Tab from '../components/Tab';
 import List from '../components/List/List';
 import Grid from '../components/Grid';
-// import { data } from '../model/data';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
@@ -17,10 +16,7 @@ const MainComponent = styled.main`
 
 const Main = () => {
   const data = useSelector(state => state.interaction.data);
-  const [dataList, setDataList] = useState(data.slice(0, 18));
   const [active, setActive] = useState('grid');
-  console.log(data);
-  console.log(dataList);
 
   const handleChange = e => {
     if (e.target.matches('.grid')) {
@@ -38,12 +34,8 @@ const Main = () => {
     <MainComponent>
       <Header />
       <Tab active={active} setActive={setActive} />
-      <Filter data={dataList} setDataList={setDataList} />
-      {active === 'grid' ? (
-        <Grid dataList={dataList} setDataList={setDataList} />
-      ) : (
-        <List dataList={dataList} />
-      )}
+      <Filter data={data} />
+      {active === 'grid' ? <Grid /> : <List />}
     </MainComponent>
   );
 };
