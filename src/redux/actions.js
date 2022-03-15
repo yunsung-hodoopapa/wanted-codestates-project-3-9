@@ -1,6 +1,11 @@
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 export const ADD_POST = 'ADD_POST';
+export const GET_DATA = 'GET_DATA';
+export const SORT_BY_DATE = 'SORT_BY_DATE';
+export const SORT_BY_LIKE = 'SORT_BY_LIKE';
+export const SORT_BY_COMMENT = 'SORT_BY_COMMENT';
+export const SORT_BY_RANDOM = 'SORT_BY_RANDOM';
 
 export const comment = (id, userId, text) => {
   return {
@@ -38,3 +43,35 @@ export const addPost = post => {
 //   likeCnt: 244,
 //   comments: [],
 // },
+export const getData = length => {
+  return {
+    type: GET_DATA,
+    payload: {
+      length,
+    },
+  };
+};
+
+export const sortByDate = () => {
+  return {
+    type: SORT_BY_DATE,
+  };
+};
+
+export const sortByLike = () => {
+  return {
+    type: SORT_BY_LIKE,
+  };
+};
+
+export const sortByComment = () => {
+  return {
+    type: SORT_BY_COMMENT,
+  };
+};
+
+export const sortByRandom = () => {
+  return {
+    type: SORT_BY_RANDOM,
+  };
+};

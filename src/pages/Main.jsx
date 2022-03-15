@@ -3,6 +3,7 @@ import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
 import List from '../components/List/List';
+import Grid from '../components/Grid';
 import { data } from '../model/data';
 import styled from 'styled-components';
 
@@ -14,15 +15,19 @@ const MainComponent = styled.main`
 `;
 
 const Main = () => {
-  const [dataList, setDataList] = useState([]);
+  const [dataList, setDataList] = useState(data.slice(0, 18));
+  const [active, setActive] = useState('grid');
 
   return (
     <MainComponent>
       <Header />
-      <Tab />
-      <Filter dataList={dataList} setDataList={setDataList} data={data} />
-      {/* <List dataList={dataList} /> */}
-      <List />
+      <Tab active={active} setActive={setActive} />
+      <Filter data={dataList} setDataList={setDataList} />
+      {active === 'grid' ? (
+        <Grid dataList={dataList} setDataList={setDataList} />
+      ) : (
+        <List />
+      )}
     </MainComponent>
   );
 };
