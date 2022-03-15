@@ -4,10 +4,7 @@ import {
   SORT_BY_LIKE,
   SORT_BY_RANDOM,
 } from '../actions';
-
-const initialState = {
-  data: [],
-};
+import { initialState } from './initialState';
 
 export const sortReducer = (state = initialState, action) => {
   switch (action.type) {
