@@ -58,7 +58,7 @@ const DetailView = () => {
           <h2>{productNm}</h2>
           <p>{review}</p>
         </InfoContainer>
-        <Comment />
+        {/* <Comment id={id} /> */}
       </ContentsContainer>
     </Wrapper>
   );
