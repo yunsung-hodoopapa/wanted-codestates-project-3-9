@@ -1,56 +1,53 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { comment } from '../redux/actions';
 
-// const comments = [
-//   {
-//     commentId: '9bed8c34-9ab9-11ec-b909-0242ac120002',
-//     comment: '내부 수납공간은 어떤가요?',
-//   },
-//   {
-//     commentId: '9bed8acc-9ab9-11ec-b909-0242ac120002',
-//     comment: '크기에 비해서 수납공간이 많은 것 같아요!',
-//   },
-//   {
-//     commentId: '9bed891e-9ab9-11ec-b909-0242ac120002',
-//     comment: '감사합니다~!',
-//   },
-// ];
-
-const Comment = () => {
+const Comment = ({ id }) => {
   const dispatch = useDispatch();
   const inputText = useRef();
-  const data = useSelector(state => state.comment);
-  const matchData = id => data?.filter(item => item.id === id);
-  const commentData = matchData('373189c2-9ab8-11ec-b909-0242ac120002')[0]
-    .comments;
+  const commentData = useSelector(state => state.comment);
+  const nowDate = new Date().getTime();
 
   const addComment = () => {
-    dispatch(
-      comment(
-        '373189c2-9ab8-11ec-b909-0242ac120002',
-        'userId',
-        inputText.current.value,
-      ),
-    );
+    dispatch(comment(id, 'userId', inputText.current.value, nowDate));
     inputText.current.value = '';
+  };
+
+  const elapsedTime = date => {
+    const elapsedMSec = Math.floor((nowDate - date) / 1000);
+    const elapsedMin = Math.floor(elapsedMSec / 60);
+    const elapsedHour = Math.floor(elapsedMin / 60);
+    const elapsedDay = Math.floor(elapsedHour / 24);
+
+    if (elapsedMin === 0) {
+      return '방금 작성';
+    } else if (elapsedHour === 0) {
+      return `${elapsedMin} 분 전`;
+    } else if (elapsedDay === 0) {
+      return `${elapsedHour}시간 전`;
+    } else {
+      return `${elapsedDay}일 전`;
+    }
   };
 
   return (
     <Wrap>
       <CommentUl>
         {commentData.map((item, index) => {
-          return (
-            <li key={index}>
-              <div>
-                <UserId>{item.commentId}</UserId>
-                <p>{item.comment}</p>
-              </div>
-              <span>8 분전</span>
-            </li>
-          );
+          if (item.id === id) {
+            return (
+              <li key={index}>
+                <div>
+                  <UserId>{item.commentId}</UserId>
+                  <p>{item.comment}</p>
+                </div>
+                <span>{elapsedTime(item.commentDt)}</span>
+              </li>
+            );
+          }
         })}
       </CommentUl>
       <Input>
@@ -71,7 +68,7 @@ const Wrap = styled.div`
 
 const CommentUl = styled.ul`
   li {
-    padding: 15px 20px;
+    padding: 15px 20px 0px;
     border-top: 1px solid #ccc;
   }
   span {
@@ -92,7 +89,7 @@ const Input = styled.div`
   display: flex;
   width: calc(100% - 40px);
   height: 40px;
-  margin: 0px 20px 20px;
+  margin: 15px 20px;
   border: 1px solid #ccc;
   border-radius: 40px;
   background-color: #fff;
@@ -123,5 +120,10 @@ const Input = styled.div`
     }
   }
 `;
+
+Comment.propTypes = {
+  commentData: PropTypes.array,
+  id: PropTypes.string,
+};
 
 export default Comment;

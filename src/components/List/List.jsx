@@ -50,7 +50,7 @@ const List = ({ dataList }) => {
     const defaultOption = {
       root: null,
       threshold: 0.5,
-      rootMargin: '0px'
+      rootMargin: '0px',
     };
     if (target) {
       observer = new IntersectionObserver(onIntersect, defaultOption);
@@ -70,6 +70,7 @@ const List = ({ dataList }) => {
           likeCnt,
           review,
           isClicked,
+          comments,
         } = item;
         return (
           <ContentsContainer key={id}>
@@ -91,7 +92,7 @@ const List = ({ dataList }) => {
               <h2>{productNm}</h2>
               <p>{review}</p>
             </InfoContainer>
-            <Comment />
+            <Comment commentData={comments} id={id} />
             <div ref={setTarget} />
           </ContentsContainer>
         );
