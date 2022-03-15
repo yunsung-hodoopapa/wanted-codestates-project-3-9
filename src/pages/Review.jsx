@@ -73,6 +73,7 @@ const Review = () => {
       <Grade
         clicked={data.clicked}
         clickGrade={index => handleStarClick(index)}
+        onClickCheck={true}
       />
       <SubmitContainer>
         <SubmitBtn onClick={registerReview}>리뷰 등록하기</SubmitBtn>
