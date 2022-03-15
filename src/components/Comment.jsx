@@ -10,11 +10,19 @@ const Comment = userId => {
   const data = useSelector(state => state.data.data);
 
   const updateComment = () => {
+    const regex = new RegExp(/^\s{1,}/gi);
+    if (regex.test(inputText.current.value)) return;
     const nowDate = new Date().getTime();
     dispatch(
       addComment(userId.userId, 'userId', inputText.current.value, nowDate),
     );
     inputText.current.value = '';
+  };
+
+  const pressEnter = e => {
+    if (e.code === 'Enter') {
+      updateComment();
+    }
   };
 
   const matched = data.filter(item => item.id === userId.userId)[0];
@@ -41,11 +49,11 @@ const Comment = userId => {
 
   return (
     <Wrap>
-      {comments.map(item => {
+      {comments.map((item, index) => {
         const { commentId, comment, commentDt } = item;
         return (
-          <CommentUl key={commentId}>
-            <li key={commentId}>
+          <CommentUl key={index}>
+            <li>
               <div>
                 <UserId>{commentId}</UserId>
                 <p>{comment}</p>
@@ -56,7 +64,12 @@ const Comment = userId => {
         );
       })}
       <Input>
-        <input ref={inputText} type="text" placeholder="댓글을 입력해주세요." />
+        <input
+          onKeyPress={pressEnter}
+          ref={inputText}
+          type="text"
+          placeholder="댓글을 입력해주세요."
+        />
         <button onClick={updateComment} type="button">
           게시
         </button>
