@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
@@ -15,23 +15,27 @@ const MainComponent = styled.main`
 `;
 
 const Main = () => {
-  const data = useSelector(state => state.sort.data);
-  const data2 = useSelector(state => state.sort);
-  console.log(data2);
-
-  const [dataList, setDataList] = useState(data.slice(0, 18));
+  const data = useSelector(state => state.interaction.data);
   const [active, setActive] = useState('grid');
+
+  const handleChange = e => {
+    if (e.target.matches('.grid')) {
+      setActive('grid');
+    } else {
+      setActive('list');
+    }
+  };
+
+  useEffect(() => {
+    console.log('리랜더링');
+  }, [data]);
 
   return (
     <MainComponent>
       <Header />
-      <Tab active={active} setActive={setActive} />
-      <Filter data={data} setDataList={setDataList} />
-      {active === 'grid' ? (
-        <Grid dataList={data} setDataList={setDataList} />
-      ) : (
-        <List dataList={data} />
-      )}
+      <Tab handleChange={handleChange} active={active} />
+      <Filter data={data} />
+      {active === 'grid' ? <Grid /> : <List />}
     </MainComponent>
   );
 };
