@@ -39,7 +39,7 @@ const Header = () => {
             alt="logo"
           />
         </Link>
-        <button>리뷰등록</button>
+        <button onClick={() => navigate('/review')}>리뷰등록</button>
       </HeaderComponent>
     </>
   );

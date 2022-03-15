@@ -33,26 +33,11 @@ const Main = () => {
   return (
     <MainComponent>
       <Header />
-      <Tab active={active} setActive={setActive} />
+      <Tab handleChange={handleChange} active={active} />
       <Filter data={data} />
       {active === 'grid' ? <Grid /> : <List />}
     </MainComponent>
   );
 };
-
-const MainWrap = styled.div`
-  background-color: #f7f6fb;
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const MainContainer = styled.div`
-  width: 500px;
-  background-color: #ffffff;
-`;
 
 export default Main;

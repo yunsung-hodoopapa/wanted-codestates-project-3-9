@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Grade from '../components/Grade';
 import ReviewTitle from '../components/ReviewTitle';
 import ImageRegister from '../components/ImageRegister';
-import { addPost } from '../redux/actions';
+import { postData } from '../redux/actions';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 const Review = () => {
@@ -61,7 +61,7 @@ const Review = () => {
     };
     if (isValid(newData)) {
       dispatch(
-        addPost({
+        postData({
           ...newData,
           ...{ createDt: new Date().valueOf() },
           ...{ reviewRate: clickStates },
