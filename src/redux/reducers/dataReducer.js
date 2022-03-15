@@ -1,15 +1,31 @@
-import { GET_DATA } from '../actions';
-
-const initialState = {
-  length: 18,
-};
+import { GET_DATA, TOGGLE_LIKE } from '../actions';
+import { initialState } from './initialState';
 
 export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_DATA: {
+    case TOGGLE_LIKE: {
+      const updatedData = state.data.map(item => {
+        if (item.id === action.id) {
+          if (item.isClicked === true) {
+            return {
+              ...item,
+              likeCnt: Number(item.likeCnt) - 1,
+              isClicked: false,
+            };
+          } else {
+            return {
+              ...item,
+              likeCnt: Number(item.likeCnt) + 1,
+              isClicked: true,
+            };
+          }
+        } else {
+          return item;
+        }
+      });
       return {
         ...state,
-        length: action.length,
+        data: updatedData,
       };
     }
     default: {

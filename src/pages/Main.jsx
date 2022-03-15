@@ -6,7 +6,8 @@ import List from '../components/List/List';
 import Grid from '../components/Grid';
 // import { data } from '../model/data';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from '../redux/actions';
 
 const MainComponent = styled.main`
   max-width: 500px;
@@ -16,11 +17,9 @@ const MainComponent = styled.main`
 `;
 
 const Main = () => {
-  const data = useSelector(state => state.interaction.data);
-  const [dataList, setDataList] = useState(data.slice(0, 18));
+  const {data, slice} = useSelector(state => state.data);
+  const dispatch = useDispatch();
   const [active, setActive] = useState('grid');
-  console.log(data);
-  console.log(dataList);
 
   const handleChange = e => {
     if (e.target.matches('.grid')) {
@@ -31,19 +30,19 @@ const Main = () => {
   };
 
   useEffect(() => {
-    console.log('리랜더링');
+    console.log('데이터 변화감지');
   }, [data]);
 
   return (
     <MainComponent>
       <Header />
       <Tab active={active} setActive={setActive} />
-      <Filter data={dataList} setDataList={setDataList} />
-      {active === 'grid' ? (
+      {/* <Filter data={dataList} setDataList={setDataList} /> */}
+      {/* {active === 'grid' ? (
         <Grid dataList={dataList} setDataList={setDataList} />
-      ) : (
-        <List dataList={dataList} />
-      )}
+      ) : ( */}
+      <List />
+      {/* )} */}
     </MainComponent>
   );
 };
