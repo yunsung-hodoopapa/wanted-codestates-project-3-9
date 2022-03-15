@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { toggleLikeButton } from '../../redux/actions';
 import Grade from '../Grade';
+import Comment from '../Comment';
 
 const List = () => {
   const dispatch = useDispatch();
@@ -49,15 +50,18 @@ const List = () => {
                 </span>
               </LabelWrapper>
               <LabelWrapper>
-                <Grade clicked={getStarfromRate(reviewRate)} disabled={true} />
+                <Grade clicked={getStarfromRate(reviewRate)} size={15} />
               </LabelWrapper>
               <LabelWrapper>
                 <h2>{productNm}</h2>
               </LabelWrapper>
+              <br />
               <LabelWrapper>
                 <span>{review}</span>
               </LabelWrapper>
+              <br />
             </InfoContainer>
+            <Comment />
           </ContentsContainer>
         );
       })}
@@ -89,7 +93,6 @@ const LabelWrapper = styled.div`
 
 const InfoContainer = styled.div`
   width: 100%;
-  height: 150px;
   padding: 16px;
   display: flex;
   flex-direction: column;

@@ -39,7 +39,7 @@ const MainWrap = styled.div`
 
 const MainContainer = styled.div`
   width: 500px;
-  background-color: #fffff;
+  background-color: #ffffff;
 `;
 
 export default Main;

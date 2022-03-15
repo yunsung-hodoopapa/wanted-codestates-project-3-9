@@ -5,7 +5,7 @@ import ReviewTitle from './ReviewTitle';
 import PropTypes from 'prop-types';
 const ARRAY = [0, 1, 2, 3, 4];
 
-function Grade({ clicked, clickGrade }) {
+function Grade({ clicked, clickGrade, onClickCheck = false, size = 50 }) {
   return (
     <Wrap>
       <ReviewTitle title={'평점'} />
@@ -14,7 +14,8 @@ function Grade({ clicked, clickGrade }) {
           return (
             <FaStar
               key={idx}
-              onClick={() => clickGrade(el)}
+              size={size}
+              onClick={() => onClickCheck && clickGrade(el)}
               className={clicked[el] && 'blackStar'}
             />
           );
@@ -26,7 +27,8 @@ function Grade({ clicked, clickGrade }) {
 Grade.propTypes = {
   clicked: PropTypes.array,
   clickGrade: PropTypes.func,
-  disabled: PropTypes.bool,
+  onClickCheck: PropTypes.bool,
+  size: PropTypes.number,
 };
 export default Grade;
 
