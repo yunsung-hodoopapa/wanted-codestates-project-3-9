@@ -33,17 +33,15 @@ $ npm run start
 ### 메인 페이지 : 그리드 뷰 / 리스트 뷰
 ![그리드 리스트](https://user-images.githubusercontent.com/56627560/158399780-945867cb-2432-452b-901b-14d7dc07f8ee.gif)
 
-
 - 상단에 위치한 탭을 클릭하면 그리드 뷰 / 리스트 뷰로 UI를 선택할 수 있습니다.
 
 ### 메인페이지 : 필터링 옵션
 ![필터링](https://user-images.githubusercontent.com/56627560/158399835-fb4e5811-eb80-454d-838c-0d736d67b019.gif)
 
-
 - 필터링 버튼을 클릭하면 옵션에 맞게 콘텐츠를 정렬할 수 있습니다. 
 
 ### 메인 페이지 : 인피니티 스크롤
-![8640b10c-5332-4939-8ada-6ef351c78abe](https://user-images.githubusercontent.com/56627560/158401472-49dfd589-12a9-4712-826c-d3a336715166.gif)
+![인피니티](https://user-images.githubusercontent.com/56627560/158402282-94ef737a-a327-4be5-b94b-b84abeafc7ac.gif)
 
 - 데이터는 18개씩 불러오며, 인피니티 스크롤 형태로 스크롤링을 지원합니다.
 
