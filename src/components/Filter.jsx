@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -13,19 +13,48 @@ const FilterList = styled.div`
       color: #4348a2;
       font-weight: 900;
       cursor: pointer;
+      &.active {
+        background: #9900ff;
+        color: white;
+        transition: all 0.5s;
+      }
     }
   }
 `;
 
 const Filter = ({ data, setDataList }) => {
+  const contentList = [
+    {
+      id: 1,
+      content: '최신순',
+      class: 'byDate',
+    },
+    {
+      id: 2,
+      content: '좋아요 많은순',
+      class: 'byLike',
+    },
+    {
+      id: 3,
+      content: '댓글 많은순',
+      class: 'byComment',
+    },
+    {
+      id: 4,
+      content: '랜덤',
+      class: 'byRandom',
+    },
+  ];
+
   const copyData = [...data];
+
+  const [tabNumber, setTabNumber] = useState(1);
 
   useEffect(() => {
     setDataList(copyData.sort((a, b) => b.createDt - a.createDt));
   }, []);
 
-  const handleFilter = e => {
-    if (!e.target.matches('.filterListWrapper > li')) return;
+  const handleFilter = (e, id) => {
     if (e.target.matches('.byDate')) {
       setDataList(copyData.sort((a, b) => b.createDt - a.createDt));
     } else if (e.target.matches('.byLike')) {
@@ -34,15 +63,26 @@ const Filter = ({ data, setDataList }) => {
       setDataList(
         copyData.sort((a, b) => b.comments.length - a.comments.length),
       );
+    } else if (e.target.matches('.byRandom')) {
+      setDataList(copyData.sort(() => Math.random() - 0.5));
     }
+    setTabNumber(id);
   };
 
   return (
     <FilterList>
-      <ul className="filterListWrapper" onClick={handleFilter}>
-        <li className="byDate">최신순</li>
-        <li className="byLike">좋아요 많은순</li>
-        <li className="byComment">댓글 많은순</li>
+      <ul className="filterListWrapper">
+        {contentList.map((value, index) => (
+          <li
+            onClick={e => handleFilter(e, value.id)}
+            key={index}
+            className={`${value.class} ${
+              tabNumber === value.id ? 'active' : ''
+            }`}
+          >
+            {value.content}
+          </li>
+        ))}
       </ul>
     </FilterList>
   );

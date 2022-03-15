@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HeaderComponent = styled.header`
   width: 100%;
@@ -31,12 +31,12 @@ const Header = () => {
   return (
     <>
       <HeaderComponent>
-        {/* <Link to="/"> */}
-        <img
-          src="https://i.balaan.io/mobile/img/icon/ico_logo.png"
-          alt="logo"
-        />
-        {/* </Link> */}
+        <Link to="/">
+          <img
+            src="https://i.balaan.io/mobile/img/icon/ico_logo.png"
+            alt="logo"
+          />
+        </Link>
         <button>리뷰등록</button>
       </HeaderComponent>
     </>
