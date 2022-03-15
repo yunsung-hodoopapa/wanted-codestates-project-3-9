@@ -62,7 +62,7 @@ const Stars = styled.div`
   }}
 
   .blackStar {
-    color: #000000;
+    color: #000000; // 검은색
   }
   .grayStar {
     color: #cccccc;

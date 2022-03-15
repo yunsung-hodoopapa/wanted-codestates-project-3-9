@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
-import GridCell from '../components/GridCell.jsx';
 import List from '../components/List/List';
+import Grid from '../components/Grid';
 import { data } from '../model/data';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ const MainComponent = styled.main`
 `;
 
 const Main = () => {
-  const [dataList, setDataList] = useState([]);
+  const [dataList, setDataList] = useState(data.slice(0, 18));
   const [active, setActive] = useState('grid');
 
   const handleChange = e => {
@@ -29,9 +29,13 @@ const Main = () => {
   return (
     <MainComponent>
       <Header />
-      <Tab handleChange={handleChange} active={active} />
-      <Filter dataList={dataList} setDataList={setDataList} data={data} />
-      {active === 'grid' ? <GridCell dataList={dataList} /> : <List dataList={dataList}/>}
+      <Tab active={active} setActive={setActive} />
+      <Filter data={dataList} setDataList={setDataList} />
+      {active === 'grid' ? (
+        <Grid dataList={dataList} setDataList={setDataList} />
+      ) : (
+        <List dataList={dataList} />
+      )}
     </MainComponent>
   );
 };

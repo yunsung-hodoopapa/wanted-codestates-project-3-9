@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HeaderComponent = styled.header`
   width: 100%;
@@ -28,6 +28,7 @@ const HeaderComponent = styled.header`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <HeaderComponent>
