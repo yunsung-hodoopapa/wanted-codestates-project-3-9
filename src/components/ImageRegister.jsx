@@ -77,15 +77,13 @@ const ImageConatiner = styled.div`
 const X = styled.span`
   position: absolute;
   margin: 10px;
-  font-size: 25px;
+  font-size: 1vw;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 100px;
   border: 1px solid;
   background: white;
-  width: 30px;
-  height: 30px;
-  display: table-col;
-  vertical-align: middle;
+  width: 2vw;
+  height: 2vh;
 `;
 
 export default ImageRegister;

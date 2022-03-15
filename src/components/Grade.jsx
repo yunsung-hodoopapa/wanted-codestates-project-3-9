@@ -42,19 +42,19 @@ const Stars = styled.div`
   justify-content: center;
 
   & svg {
-    color: #cccccc;
+    color: #cccccc; // 회색
     cursor: pointer;
   }
 
   :hover svg {
-    color: #000000;
+    color: #000000; // 검은색
   }
 
   & svg:hover ~ svg {
-    color: #cccccc;
+    color: #cccccc; // 회색
   }
 
   .blackStar {
-    color: #000000;
+    color: #000000; // 검은색
   }
 `;

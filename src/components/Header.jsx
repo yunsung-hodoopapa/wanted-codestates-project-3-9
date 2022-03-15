@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router';
 // import { Link } from 'react-router-dom';
 
 const HeaderComponent = styled.header`
@@ -28,6 +29,7 @@ const HeaderComponent = styled.header`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <HeaderComponent>
@@ -37,7 +39,7 @@ const Header = () => {
           alt="logo"
         />
         {/* </Link> */}
-        <button>리뷰등록</button>
+        <button onClick={() => navigate('/review')}>리뷰등록</button>
       </HeaderComponent>
     </>
   );
