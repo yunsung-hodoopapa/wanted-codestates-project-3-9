@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 import { toggleLikeButton } from '../../redux/actions';
 import Grade from '../Grade';
 import Comment from '../Comment';
 import { data } from '../../model/data';
+import { exactPathCopy } from '../../util/index';
 
 const List = ({ dataList }) => {
   const dispatch = useDispatch();
+  const coryUrlRef = useRef();
   const [target, setTarget] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -36,28 +38,28 @@ const List = ({ dataList }) => {
     setIsLoaded(false);
   };
 
-  const onIntersect = ([entry], observer) => {
-    if (entry.isIntersecting && !isLoaded) {
-      console.log('check', entry.isIntersecting);
-      observer.unobserve(entry.target);
-      addItems();
-      observer.observe(entry.target);
-    }
-  };
+  // const onIntersect = ([entry], observer) => {
+  //   if (entry.isIntersecting && !isLoaded) {
+  //     console.log('check', entry.isIntersecting);
+  //     observer.unobserve(entry.target);
+  //     addItems();
+  //     observer.observe(entry.target);
+  //   }
+  // };
 
-  useEffect(() => {
-    let observer;
-    const defaultOption = {
-      root: null,
-      threshold: 0.5,
-      rootMargin: '0px'
-    };
-    if (target) {
-      observer = new IntersectionObserver(onIntersect, defaultOption);
-      observer.observe(target);
-    }
-    return () => observer && observer.disconnect();
-  }, [target]);
+  // useEffect(() => {
+  //   let observer;
+  //   const defaultOption = {
+  //     root: null,
+  //     threshold: 0.5,
+  //     rootMargin: '0px'
+  //   };
+  //   if (target) {
+  //     observer = new IntersectionObserver(onIntersect, defaultOption);
+  //     observer.observe(target);
+  //   }
+  //   return () => observer && observer.disconnect();
+  // }, [target]);
 
   return (
     <Wrapper>
@@ -75,19 +77,24 @@ const List = ({ dataList }) => {
           <ContentsContainer key={id}>
             <img src={productImg} alt={productNm} />
             <InfoContainer>
-              <Like onClick={() => clickLikeBtn(id)}>
-                <i>
-                  {isClicked ? (
-                    <AiFillHeart color="red" size={18} />
-                  ) : (
-                    <AiOutlineHeart size={18} />
-                  )}
-                </i>
-                <span>{likeCnt}</span>
-              </Like>
-              <i>
-                <Grade clicked={getStarfromRate(reviewRate)} size={15} />
-              </i>
+              <FlexContainer>
+                <div>
+                  <Like onClick={() => clickLikeBtn(id)}>
+                    <i>
+                      {isClicked ? (
+                        <AiFillHeart color="red" size={18} />
+                      ) : (
+                        <AiOutlineHeart size={18} />
+                      )}
+                    </i>
+                    <span>{likeCnt}</span>
+                  </Like>
+                  <i>
+                    <Grade clicked={getStarfromRate(reviewRate)} size={15} />
+                  </i>
+                </div>
+                <AiOutlineShareAlt size={20} onClick={() => exactPathCopy(id)} />
+              </FlexContainer>
               <h2>{productNm}</h2>
               <p>{review}</p>
             </InfoContainer>
@@ -128,6 +135,12 @@ const InfoContainer = styled.div`
   p {
     line-height: 20px;
   }
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Like = styled.div`

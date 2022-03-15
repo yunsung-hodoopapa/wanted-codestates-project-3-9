@@ -50,13 +50,15 @@ const Filter = ({ data, setDataList }) => {
 
   const handleFilter = (e, id) => {
     if (e.target.matches('.byDate')) {
-      setDataList(data.sort((a, b) => b.createDt - a.createDt));
+      setDataList([...data].sort((a, b) => b.createDt - a.createDt));
     } else if (e.target.matches('.byLike')) {
-      setDataList(data.sort((a, b) => b.likeCnt - a.likeCnt));
+      setDataList([...data].sort((a, b) => b.likeCnt - a.likeCnt));
     } else if (e.target.matches('.byComment')) {
-      setDataList(data.sort((a, b) => b.comments.length - a.comments.length));
+      setDataList(
+        [...data].sort((a, b) => b.comments.length - a.comments.length),
+      );
     } else if (e.target.matches('.byRandom')) {
-      setDataList(data.sort(() => Math.random() - 0.5));
+      setDataList([...data].sort(() => Math.random() - 0.5));
     }
     setTabNumber(id);
   };
