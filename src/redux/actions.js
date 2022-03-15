@@ -2,6 +2,7 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 export const ADD_POST = 'ADD_POST';
 export const GET_DATA = 'GET_DATA';
+export const POST_DATA = 'POST_DATA';
 export const SORT_BY_DATE = 'SORT_BY_DATE';
 export const SORT_BY_LIKE = 'SORT_BY_LIKE';
 export const SORT_BY_COMMENT = 'SORT_BY_COMMENT';
@@ -24,10 +25,10 @@ export const toggleLikeButton = id => {
   };
 };
 
-export const addPost = post => {
+export const postData = post => {
   console.log(post);
   return {
-    type: ADD_POST,
+    type: POST_DATA,
     post,
   };
 };
