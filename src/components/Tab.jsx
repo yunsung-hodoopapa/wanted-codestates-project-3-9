@@ -27,15 +27,7 @@ const TabComponent = styled.div`
   }
 `;
 
-const Tab = ({ active, setActive }) => {
-  const handleChange = e => {
-    if (e.target.matches('.grid')) {
-      setActive('grid');
-    } else {
-      setActive('list');
-    }
-  };
-
+const Tab = ({ handleChange, active }) => {
   return (
     <TabComponent>
       <ul onClick={handleChange}>
@@ -51,8 +43,8 @@ const Tab = ({ active, setActive }) => {
 };
 
 Tab.propTypes = {
+  handleChange: PropTypes.func,
   active: PropTypes.string,
-  setActive: PropTypes.func,
 };
 
 export default Tab;

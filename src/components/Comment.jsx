@@ -1,20 +1,25 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { comment } from '../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { addComment } from '../redux/actions';
 
-const Comment = ({ id }) => {
+const Comment = userId => {
   const dispatch = useDispatch();
   const inputText = useRef();
-  const commentData = useSelector(state => state.comment);
+  const data = useSelector(state => state.data.data);
 
-  const addComment = () => {
+  const updateComment = () => {
     const nowDate = new Date().getTime();
-    dispatch(comment(id, 'userId', inputText.current.value, nowDate));
+    dispatch(
+      addComment(userId.userId, 'userId', inputText.current.value, nowDate),
+    );
     inputText.current.value = '';
   };
+
+  const matched = data.filter(item => item.id === userId.userId)[0];
+
+  const { comments } = matched;
 
   const elapsedTime = date => {
     const nowDate = new Date().getTime();
@@ -36,24 +41,23 @@ const Comment = ({ id }) => {
 
   return (
     <Wrap>
-      <CommentUl>
-        {commentData.map((item, index) => {
-          if (item.id === id) {
-            return (
-              <li key={index}>
-                <div>
-                  <UserId>{item.commentId}</UserId>
-                  <p>{item.comment}</p>
-                </div>
-                <span>{elapsedTime(item.commentDt)}</span>
-              </li>
-            );
-          }
-        })}
-      </CommentUl>
+      {comments.map(item => {
+        const { commentId, comment, commentDt } = item;
+        return (
+          <CommentUl key={commentId}>
+            <li key={commentId}>
+              <div>
+                <UserId>{commentId}</UserId>
+                <p>{comment}</p>
+              </div>
+              <span>{elapsedTime(commentDt)}</span>
+            </li>
+          </CommentUl>
+        );
+      })}
       <Input>
         <input ref={inputText} type="text" placeholder="댓글을 입력해주세요." />
-        <button onClick={addComment} type="button">
+        <button onClick={updateComment} type="button">
           게시
         </button>
       </Input>

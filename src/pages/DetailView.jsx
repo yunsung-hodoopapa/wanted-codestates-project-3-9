@@ -12,7 +12,6 @@ import { copy } from '../util';
 const DetailView = () => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.data.data);
-  console.log(data);
   const location = useLocation();
   const path = location.pathname.split('/');
   const pageId = path[path.length - 1];
@@ -63,7 +62,7 @@ const DetailView = () => {
           <h2>{productNm}</h2>
           <p>{review}</p>
         </InfoContainer>
-        <Comment />
+        <Comment userId={id} />
       </ContentsContainer>
     </Wrapper>
   );

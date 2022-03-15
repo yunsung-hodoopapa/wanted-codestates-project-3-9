@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {
+  sortByDate,
+  sortByLike,
+  sortByComment,
+  sortByRandom,
+} from '../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const FilterList = styled.div`
   ul {
@@ -22,7 +29,7 @@ const FilterList = styled.div`
   }
 `;
 
-const Filter = ({ data, setDataList }) => {
+const Filter = () => {
   const contentList = [
     {
       id: 1,
@@ -47,18 +54,21 @@ const Filter = ({ data, setDataList }) => {
   ];
 
   const [tabNumber, setTabNumber] = useState(1);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(sortByDate());
+  }, []);
 
   const handleFilter = (e, id) => {
     if (e.target.matches('.byDate')) {
-      setDataList([...data].sort((a, b) => b.createDt - a.createDt));
+      dispatch(sortByDate());
     } else if (e.target.matches('.byLike')) {
-      setDataList([...data].sort((a, b) => b.likeCnt - a.likeCnt));
+      dispatch(sortByLike());
     } else if (e.target.matches('.byComment')) {
-      setDataList(
-        [...data].sort((a, b) => b.comments.length - a.comments.length),
-      );
+      dispatch(sortByComment());
     } else if (e.target.matches('.byRandom')) {
-      setDataList([...data].sort(() => Math.random() - 0.5));
+      dispatch(sortByRandom());
     }
     setTabNumber(id);
   };

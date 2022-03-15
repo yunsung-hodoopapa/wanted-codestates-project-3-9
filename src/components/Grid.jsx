@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { data } from '../model/data';
 import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from '../redux/actions';
 
 const defaultOption = {
   root: null,
@@ -10,32 +10,31 @@ const defaultOption = {
   rootMargin: '0px',
 };
 
-const Grid = ({ dataList, setDataList }) => {
+const Grid = () => {
   const [target, setTarget] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [page, setPage] = useState(2);
+  const [isLoaded, setIsLoaded] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data, length } = useSelector(state => ({
+    length: state.data.length,
+    data: state.data.data,
+  }));
 
-  const addItems = () => {
-    if (dataList.length === data.length) {
-      alert('더 이상 불러올 데이터가 없습니다.');
+  useEffect(() => {
+    if (data.length === length) {
+      alert('모든 데이터를 불러왔습니다.');
       setIsLoaded(false);
-      return;
     }
-    setIsLoaded(true);
-    // setDataList(data.slice(0, );
-    setIsLoaded(false);
-  };
+  }, [length]);
 
   const moveDetailPage = id => {
     navigate(`/detail/${id}`);
   };
 
   const onIntersect = ([entry], observer) => {
-    if (entry.isIntersecting && !isLoaded) {
-      console.log('check', entry.isIntersecting);
+    if (entry.isIntersecting) {
       observer.unobserve(entry.target);
-      addItems();
+      dispatch(getData());
       observer.observe(entry.target);
     }
   };
@@ -52,7 +51,7 @@ const Grid = ({ dataList, setDataList }) => {
   return (
     <Wrapper>
       <Items>
-        {dataList.map((item, idx) => {
+        {data.slice(0, length).map((item, idx) => {
           const { id } = item;
           return (
             <li key={id} onClick={() => moveDetailPage(id)}>
@@ -61,14 +60,9 @@ const Grid = ({ dataList, setDataList }) => {
           );
         })}
       </Items>
-      <div ref={setTarget} className="Target-Element"></div>
+      {isLoaded && <div ref={setTarget} className="Target-Element"></div>}
     </Wrapper>
   );
-};
-
-Grid.propTypes = {
-  dataList: PropTypes.array,
-  setDataList: PropTypes.func,
 };
 
 const Wrapper = styled.div`
@@ -77,7 +71,7 @@ const Wrapper = styled.div`
 
   .Target-Element {
     width: 100vw;
-    height: 1px;
+    height: 50px;
   }
 `;
 
