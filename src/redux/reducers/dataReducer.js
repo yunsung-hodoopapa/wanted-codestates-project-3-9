@@ -3,14 +3,17 @@ import { initialState } from './initialState';
 
 export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case GET_DATA: {
-    //   return {
-    //     ...state,
-    //     length: action.length,
-    //   };
-    // }
     case POST_DATA: {
-      return { data: [...state.data, action.post] };
+      return {
+        ...state,
+        data: [...state.data, action.post],
+      };
+    }
+    case GET_DATA: {
+      return {
+        ...state,
+        length: state.length + 9,
+      };
     }
     default: {
       return state;

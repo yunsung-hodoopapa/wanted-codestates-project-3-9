@@ -33,24 +33,9 @@ export const postData = post => {
   };
 };
 
-// {
-//   id: '1',
-//   productNm: '블랙 핸드백',
-//   productImg: [
-//     'https://i.balaan.io/review/c836c897ce27f22497d14d8e9f461ece.webp',
-//   ],
-//   createDt: 1645401600,
-//   review: '무난하게 데일리로 활용중입니다.',
-//   reviewRate: 3,
-//   likeCnt: 244,
-//   comments: [],
-// },
-export const getData = length => {
+export const getData = () => {
   return {
     type: GET_DATA,
-    payload: {
-      length,
-    },
   };
 };
 
