@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { toggleLikeButton } from '../../redux/actions';
 import Grade from '../Grade';
 import Comment from '../Comment';
+import { data } from '../../model/data';
 
-const List = () => {
+const List = ({ dataList }) => {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.interaction.data);
+  const [target, setTarget] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const clickLikeBtn = id => {
     dispatch(toggleLikeButton(id));
@@ -22,9 +25,43 @@ const List = () => {
     return initClicked;
   };
 
+  const addItems = () => {
+    if (dataList.length === data.length) {
+      alert('더 이상 불러올 데이터가 없습니다.');
+      setIsLoaded(false);
+      return;
+    }
+    setIsLoaded(true);
+    // setDataList(data.slice(0, );
+    setIsLoaded(false);
+  };
+
+  const onIntersect = ([entry], observer) => {
+    if (entry.isIntersecting && !isLoaded) {
+      console.log('check', entry.isIntersecting);
+      observer.unobserve(entry.target);
+      addItems();
+      observer.observe(entry.target);
+    }
+  };
+
+  useEffect(() => {
+    let observer;
+    const defaultOption = {
+      root: null,
+      threshold: 0.5,
+      rootMargin: '0px'
+    };
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, defaultOption);
+      observer.observe(target);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
   return (
     <Wrapper>
-      {data.map(item => {
+      {dataList.map(item => {
         const {
           id,
           productNm,
@@ -55,6 +92,7 @@ const List = () => {
               <p>{review}</p>
             </InfoContainer>
             <Comment />
+            <div ref={setTarget} />
           </ContentsContainer>
         );
       })}
@@ -98,5 +136,9 @@ const Like = styled.div`
     margin-right: 5px;
   }
 `;
+
+List.propTypes = {
+  dataList: PropTypes.array,
+};
 
 export default List;

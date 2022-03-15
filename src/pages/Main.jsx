@@ -18,6 +18,14 @@ const Main = () => {
   const [dataList, setDataList] = useState(data.slice(0, 18));
   const [active, setActive] = useState('grid');
 
+  const handleChange = e => {
+    if (e.target.matches('.grid')) {
+      setActive('grid');
+    } else {
+      setActive('list');
+    }
+  };
+
   return (
     <MainComponent>
       <Header />
@@ -26,7 +34,7 @@ const Main = () => {
       {active === 'grid' ? (
         <Grid dataList={dataList} setDataList={setDataList} />
       ) : (
-        <List />
+        <List dataList={dataList} />
       )}
     </MainComponent>
   );
