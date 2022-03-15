@@ -38,14 +38,17 @@ export const data = [
       {
         commentId: '9bed8c34-9ab9-11ec-b909-0242ac120002',
         comment: '내부 수납공간은 어떤가요?',
+        commentDt: 1646351872674,
       },
       {
         commentId: '9bed8acc-9ab9-11ec-b909-0242ac120002',
         comment: '크기에 비해서 수납공간이 많은 것 같아요!',
+        commentDt: 1646651872674,
       },
       {
         commentId: '9bed891e-9ab9-11ec-b909-0242ac120002',
         comment: '감사합니다~!',
+        commentDt: 1646951872674,
       },
     ],
   },
@@ -87,6 +90,7 @@ export const data = [
       {
         commentId: '9bed8df6-9ab9-11ec-b909-0242ac120002',
         comment: '팬츠 정보 알 수 있을까요?',
+        commentDt: 1646951872674,
       },
     ],
   },
@@ -145,6 +149,7 @@ export const data = [
       {
         commentId: '9bed913e-9ab9-11ec-b909-0242ac120002',
         comment: '공감합니다!',
+        commentDt: 1646951872674,
       },
     ],
   },
@@ -199,6 +204,7 @@ export const data = [
       {
         commentId: '9bed9364-9ab9-11ec-b909-0242ac120002',
         comment: '저는 조금 작았어요 ㅠㅜ',
+        commentDt: 1646951872674,
       },
     ],
   },
@@ -240,6 +246,7 @@ export const data = [
       {
         commentId: '9bed951c-9ab9-11ec-b909-0242ac120002',
         comment: '착용하신 가디건 정보 부탁드립니다~ㅠㅜ',
+        commentDt: 1646951872674,
       },
     ],
   },
@@ -257,6 +264,7 @@ export const data = [
       {
         commentId: '9bed96d4-9ab9-11ec-b909-0242ac120002',
         comment: '사이즈 참고 가능할까요?',
+        commentDt: 1646951872674,
       },
     ],
   },
@@ -274,10 +282,12 @@ export const data = [
       {
         commentId: '9bed99f4-9ab9-11ec-b909-0242ac120002',
         comment: '가방 정보 알 수 있을까요?',
+        commentDt: 1646951872674,
       },
       {
         commentId: '9bed981e-9ab9-11ec-b909-0242ac120002',
         comment: '선물 받은거라 ㅠㅜ 죄송합니다',
+        commentDt: 1647051872674,
       },
     ],
   },
@@ -307,6 +317,7 @@ export const data = [
       {
         commentId: '9bed9b3e-9ab9-11ec-b909-0242ac120002',
         comment: '한사이즈 크게 사면되나요?',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -348,6 +359,7 @@ export const data = [
       {
         commentId: '9bed9cd8-9ab9-11ec-b909-0242ac120002',
         comment: '디자인 너무 이쁩니다',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -389,6 +401,7 @@ export const data = [
       {
         commentId: '9bed9e22-9ab9-11ec-b909-0242ac120002',
         comment: '색상이 샘플 사진이랑 비슷한가요?',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -406,6 +419,7 @@ export const data = [
       {
         commentId: '9bed9fd0-9ab9-11ec-b909-0242ac120002',
         comment: '카드 실물 샷도 가능한가요?',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -435,6 +449,7 @@ export const data = [
       {
         commentId: '9beda1a6-9ab9-11ec-b909-0242ac120002',
         comment: '',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -476,10 +491,12 @@ export const data = [
       {
         commentId: '5ce9da44-9af8-11ec-b909-0242ac120002',
         comment: '색상은 이미지랑 비슷한가요?',
+        commentDt: 1646651872674,
       },
       {
         commentId: '5ce9db66-9af8-11ec-b909-0242ac120002',
         comment: '저는 발볼이 좁던데 구매하시는 분들 참고바랍니다!',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -523,6 +540,7 @@ export const data = [
       {
         commentId: '5ce9dc74-9af8-11ec-b909-0242ac120002',
         comment: '👍👍👍👍👍👍👍',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -540,6 +558,7 @@ export const data = [
       {
         commentId: '5ce9df12-9af8-11ec-b909-0242ac120002',
         comment: '사이즈는 어떻게 결정하셨나요! M이랑 L중에 고민입니다.',
+        commentDt: 1646651872674,
       },
     ],
   },
@@ -595,10 +614,12 @@ export const data = [
       {
         commentId: '5ce9e02a-9af8-11ec-b909-0242ac120002',
         comment: '사이즈가 어떻게 되나요?',
+        commentDt: 1646651872674,
       },
       {
         commentId: '5ce9e156-9af8-11ec-b909-0242ac120002',
         comment: '실측사이즈는 모르겠고, 공간은 넉넉합니다!',
+        commentDt: 1646751872674,
       },
     ],
   },
@@ -616,6 +637,7 @@ export const data = [
       {
         commentId: '5ce9e2d2-9af8-11ec-b909-0242ac120002',
         comment: '리뷰 사진보고 신발 너무 예뻐서 구매했습니다~!',
+        commentDt: 1646751872674,
       },
     ],
   },
@@ -646,10 +668,12 @@ export const data = [
       {
         commentId: '5ce9e5d4-9af8-11ec-b909-0242ac120002',
         comment: '비슷한 디자인으로 찾고 있는데 내부 수납은 어떤가요?',
+        commentDt: 1646751872674,
       },
       {
         commentId: '5ce9e71e-9af8-11ec-b909-0242ac120002',
         comment: '크게 불편함은 없습니다',
+        commentDt: 1646791872674,
       },
     ],
   },
@@ -668,6 +692,7 @@ export const data = [
       {
         commentId: '5ce9ea70-9af8-11ec-b909-0242ac120002',
         comment: '상의 정보 알수 있을까요!',
+        commentDt: 1646791872674,
       },
     ],
   },
@@ -685,10 +710,12 @@ export const data = [
       {
         commentId: '5ce9e836-9af8-11ec-b909-0242ac120002',
         comment: '길이는 어떤가요?',
+        commentDt: 1646791872674,
       },
       {
         commentId: '5ce9e94e-9af8-11ec-b909-0242ac120002',
         comment: '코드 정보 알 수 있을까요?',
+        commentDt: 1646791872674,
       },
     ],
   },
@@ -743,6 +770,7 @@ export const data = [
       {
         commentId: '5ce9ed0e-9af8-11ec-b909-0242ac120002',
         comment: '색상은 어떤가요? 사진이 흑백이라... 핏은 맘에듭니다!',
+        commentDt: 1646791872674,
       },
     ],
   },
@@ -774,6 +802,7 @@ export const data = [
         commentId: '5ce9ee30-9af8-11ec-b909-0242ac120002',
         comment:
           '발볼이 좁다고 하시니 고민이 되네요 색감이랑 디자인은 진짜 예쁜데 ㅠㅜ',
+        commentDt: 1646791872674,
       },
     ],
   },
@@ -804,10 +833,12 @@ export const data = [
       {
         commentId: '5ce9ef3e-9af8-11ec-b909-0242ac120002',
         comment: '실측 사이즈랑 좀 차이 있는 것 같나요?',
+        commentDt: 1646791872674,
       },
       {
         commentId: '5ce9f060-9af8-11ec-b909-0242ac120002',
         comment: '컬러는 사진이랑 유사한가요?',
+        commentDt: 1647352167269,
       },
     ],
   },
@@ -825,6 +856,7 @@ export const data = [
       {
         commentId: '5ce9f326-9af8-11ec-b909-0242ac120002',
         comment: '상의 정보 알 수 있을까요?',
+        commentDt: 1647352167269,
       },
     ],
   },
@@ -866,6 +898,7 @@ export const data = [
       {
         commentId: '5ce9f43e-9af8-11ec-b909-0242ac120002',
         comment: '후기 보고 저도 구매했습니다 얼른 왔으면 좋겠습니다!',
+        commentDt: 1647352167269,
       },
     ],
   },
