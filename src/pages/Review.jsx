@@ -71,18 +71,26 @@ const Review = () => {
       ></ContentArea>
       <ImageRegister changePhoto={changePhoto} />
       <ReviewTitle title={'평점'} />
-      <Grade
-        clicked={data.clicked}
-        clickGrade={index => handleStarClick(index)}
-        onClickCheck={true}
-        hoverAbled={true}
-      />
+      <GradeWrap>
+        <Grade
+          clicked={data.clicked}
+          clickGrade={index => handleStarClick(index)}
+          onClickCheck={true}
+          hoverAbled={true}
+        />
+      </GradeWrap>
       <SubmitContainer>
         <SubmitBtn onClick={registerReview}>리뷰 등록하기</SubmitBtn>
       </SubmitContainer>
     </ReviewContainer>
   );
 };
+
+const GradeWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0px;
+`;
 
 const ReviewContainer = styled.div`
   margin: auto;

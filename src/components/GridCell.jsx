@@ -1,15 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-const List = ({ dataList }) => {
+const GridCell = ({ dataList }) => {
+  const navigate = useNavigate();
+
+  const moveDetailContents = id => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <Wrapper>
       <Items>
-        {dataList.map((item, idx) => {
+        {dataList.map(item => {
+          const { id } = item;
           return (
-            <li key={idx + 1}>
-              <img src={item.productImg[0]} />
+            <li key={id}>
+              <img
+                src={item.productImg[0]}
+                onClick={() => moveDetailContents(id)}
+              />
             </li>
           );
         })}
@@ -18,7 +29,7 @@ const List = ({ dataList }) => {
   );
 };
 
-List.propTypes = {
+GridCell.propTypes = {
   dataList: PropTypes.array,
 };
 
@@ -45,4 +56,4 @@ const Items = styled.ul`
   }
 `;
 
-export default List;
+export default GridCell;

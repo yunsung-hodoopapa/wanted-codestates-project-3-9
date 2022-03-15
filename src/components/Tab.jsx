@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BsGrid3X3, BsViewList } from 'react-icons/bs';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const TabComponent = styled.div`
   width: 100%;
@@ -26,17 +27,7 @@ const TabComponent = styled.div`
   }
 `;
 
-const Tab = () => {
-  const [active, setActive] = useState('grid');
-
-  const handleChange = e => {
-    if (e.target.matches('.grid')) {
-      setActive('grid');
-    } else {
-      setActive('list');
-    }
-  };
-
+const Tab = ({ handleChange, active }) => {
   return (
     <TabComponent>
       <ul onClick={handleChange}>
@@ -49,6 +40,11 @@ const Tab = () => {
       </ul>
     </TabComponent>
   );
+};
+
+Tab.propTypes = {
+  handleChange: PropTypes.func,
+  active: PropTypes.string,
 };
 
 export default Tab;

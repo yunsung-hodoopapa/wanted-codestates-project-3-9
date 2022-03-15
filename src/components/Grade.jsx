@@ -13,7 +13,7 @@ function Grade({
   hoverAbled = false,
 }) {
   return (
-    <Wrap>
+    <>
       <Stars hoverAbled={hoverAbled}>
         {ARRAY.map((el, idx) => {
           return (
@@ -26,7 +26,7 @@ function Grade({
           );
         })}
       </Stars>
-    </Wrap>
+    </>
   );
 }
 Grade.propTypes = {
@@ -37,12 +37,6 @@ Grade.propTypes = {
   hoverAbled: PropTypes.bool,
 };
 export default Grade;
-
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0px;
-`;
 
 const Stars = styled.div`
   display: flex;

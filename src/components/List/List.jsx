@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { data } from '../../model/data';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { toggleLikeButton } from '../../redux/actions';
 import Grade from '../Grade';
 import Comment from '../Comment';
 
-const List = () => {
+const List = ({dataList}) => {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.interaction.data);
+  // const data = useSelector(state => state.interaction.data);
 
   const clickLikeBtn = id => {
     dispatch(toggleLikeButton(id));
@@ -25,7 +25,7 @@ const List = () => {
 
   return (
     <Wrapper>
-      {data.map(item => {
+      {dataList.map(item => {
         const {
           id,
           productNm,
@@ -37,7 +37,7 @@ const List = () => {
         } = item;
         return (
           <ContentsContainer key={id}>
-            <Image src={`${productImg}`} />
+            <img src={`${productImg}`} />
             <InfoContainer>
               <LabelWrapper>
                 <span onClick={() => clickLikeBtn(id)}>
@@ -80,11 +80,11 @@ const ContentsContainer = styled.div`
   width: 100%;
 `;
 
-const Image = styled.div`
+const Image = styled.img`
   height: 677px;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url(${props => props.src});
+  src: url(${props => props.src});
 `;
 
 const LabelWrapper = styled.div`
@@ -98,5 +98,9 @@ const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+
+List.propTypes = {
+  dataList: PropTypes.array,
+};
 
 export default List;
