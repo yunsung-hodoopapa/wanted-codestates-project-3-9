@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import Grade from '../components/Grade';
 import ReviewTitle from '../components/ReviewTitle';
 import ImageRegister from '../components/ImageRegister';
+import { addPost } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 const Review = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   /*
+  
   {
     id: '1',
     productNm: '블랙 핸드백',
@@ -50,6 +56,16 @@ const Review = () => {
       ...{ id: Math.ceil(Math.random() * 10000000).toString() },
     });
 
+    dispatch(
+      addPost({
+        ...newData,
+        ...{ createDt: new Date().valueOf() },
+        ...{ reviewRate: clickStates },
+        ...{ id: Math.ceil(Math.random() * 10000000).toString() },
+      }),
+    );
+
+    navigate('/');
     // Todo : dispatch로 상태 추가하고 navigate로 첫화면으로 옮기기
   };
 

@@ -28,6 +28,7 @@ const HeaderComponent = styled.header`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <HeaderComponent>
