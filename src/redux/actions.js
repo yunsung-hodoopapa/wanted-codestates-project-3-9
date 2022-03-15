@@ -7,12 +7,13 @@ export const SORT_BY_LIKE = 'SORT_BY_LIKE';
 export const SORT_BY_COMMENT = 'SORT_BY_COMMENT';
 export const SORT_BY_RANDOM = 'SORT_BY_RANDOM';
 
-export const comment = (id, userId, text) => {
+export const comment = (id, userId, text, date) => {
   return {
     type: ADD_COMMENT,
     id,
     userId,
     text,
+    date,
   };
 };
 
