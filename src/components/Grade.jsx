@@ -1,22 +1,27 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
-import styled from 'styled-components';
-import ReviewTitle from './ReviewTitle';
+import styled, { css } from 'styled-components';
+
 import PropTypes from 'prop-types';
 const ARRAY = [0, 1, 2, 3, 4];
 
-function Grade({ clicked, clickGrade, onClickCheck = false, size = 50 }) {
+function Grade({
+  clicked,
+  clickGrade,
+  onClickCheck = false,
+  size = 50,
+  hoverAbled = false,
+}) {
   return (
     <Wrap>
-      <ReviewTitle title={'평점'} />
-      <Stars>
+      <Stars hoverAbled={hoverAbled}>
         {ARRAY.map((el, idx) => {
           return (
             <FaStar
               key={idx}
               size={size}
               onClick={() => onClickCheck && clickGrade(el)}
-              className={clicked[el] && 'blackStar'}
+              className={clicked[el] ? 'blackStar' : 'grayStar'}
             />
           );
         })}
@@ -29,6 +34,7 @@ Grade.propTypes = {
   clickGrade: PropTypes.func,
   onClickCheck: PropTypes.bool,
   size: PropTypes.number,
+  hoverAbled: PropTypes.bool,
 };
 export default Grade;
 
@@ -42,21 +48,29 @@ const Stars = styled.div`
   display: flex;
   margin: 10px;
   justify-content: center;
+  ${({ hoverAbled }) => {
+    if (hoverAbled)
+      return css`
+        & svg {
+          color: #cccccc;
+          cursor: pointer;
+        }
 
-  & svg {
-    color: #cccccc;
-    cursor: pointer;
-  }
+        :hover svg {
+          color: #000000;
+        }
 
-  :hover svg {
-    color: #000000;
-  }
-
-  & svg:hover ~ svg {
-    color: #cccccc;
-  }
+        & svg:hover ~ svg {
+          color: #cccccc;
+        }
+      `;
+    else return css``;
+  }}
 
   .blackStar {
     color: #000000;
+  }
+  .grayStar {
+    color: #cccccc;
   }
 `;
