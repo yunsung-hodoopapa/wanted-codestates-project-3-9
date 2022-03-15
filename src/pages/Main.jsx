@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Filter from '../components/Filter';
 import Header from '../components/Header';
 import Tab from '../components/Tab';
 import List from '../components/List/List';
 import Grid from '../components/Grid';
-// import { data } from '../model/data';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
@@ -16,51 +15,25 @@ const MainComponent = styled.main`
 `;
 
 const Main = () => {
-  const data = useSelector(state => state.interaction.data);
+  const data = useSelector(state => state.sort.data);
+  const data2 = useSelector(state => state.sort);
+  console.log(data2);
+
   const [dataList, setDataList] = useState(data.slice(0, 18));
   const [active, setActive] = useState('grid');
-  console.log(data);
-  console.log(dataList);
-
-  const handleChange = e => {
-    if (e.target.matches('.grid')) {
-      setActive('grid');
-    } else {
-      setActive('list');
-    }
-  };
-
-  useEffect(() => {
-    console.log('리랜더링');
-  }, [data]);
 
   return (
     <MainComponent>
       <Header />
       <Tab active={active} setActive={setActive} />
-      <Filter data={dataList} setDataList={setDataList} />
+      <Filter data={data} setDataList={setDataList} />
       {active === 'grid' ? (
-        <Grid dataList={dataList} setDataList={setDataList} />
+        <Grid dataList={data} setDataList={setDataList} />
       ) : (
-        <List dataList={dataList} />
+        <List dataList={data} />
       )}
     </MainComponent>
   );
 };
-
-const MainWrap = styled.div`
-  background-color: #f7f6fb;
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const MainContainer = styled.div`
-  width: 500px;
-  background-color: #ffffff;
-`;
 
 export default Main;

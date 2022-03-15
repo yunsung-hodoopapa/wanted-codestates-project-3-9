@@ -4,35 +4,37 @@ import {
   SORT_BY_LIKE,
   SORT_BY_RANDOM,
 } from '../actions';
-
-const initialState = {
-  data: [],
-};
+import { initialState } from './initialState';
 
 export const sortReducer = (state = initialState, action) => {
+  const data = [...state.data];
   switch (action.type) {
     case SORT_BY_DATE: {
+      data.sort((a, b) => b.createDt - a.createDt);
       return {
         ...state,
-        data: state.data.sort((a, b) => b.createDt - a.createDt),
+        data,
       };
     }
     case SORT_BY_LIKE: {
+      data.sort((a, b) => b.likeCnt - a.likeCnt);
       return {
         ...state,
-        data: state.data.sort((a, b) => b.likeCnt - a.likeCnt),
+        data,
       };
     }
     case SORT_BY_COMMENT: {
+      data.sort((a, b) => b.comments.length - a.comments.length);
       return {
         ...state,
-        data: state.data.sort((a, b) => b.comments.length - a.comments.length),
+        data,
       };
     }
     case SORT_BY_RANDOM: {
+      data.sort(() => Math.random() - 0.5);
       return {
         ...state,
-        data: state.data.sort(() => Math.random() - 0.5),
+        data,
       };
     }
     default:
