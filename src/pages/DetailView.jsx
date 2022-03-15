@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 import { toggleLikeButton } from '../redux/actions';
 import Grade from '../components/Grade';
 import Comment from '../components/Comment';
 import { useLocation } from 'react-router-dom';
+import Header from '../components/Header';
+import { copy } from '../util';
 
 const DetailView = () => {
   const dispatch = useDispatch();
@@ -31,30 +33,30 @@ const DetailView = () => {
 
   return (
     <Wrapper>
+      <Header />
       <ContentsContainer key={id}>
         <img src={`${productImg}`} />
         <InfoContainer>
-          <LabelWrapper>
-            <span onClick={() => clickLikeBtn(id)}>
-              {isClicked ? (
-                <AiFillHeart color="red" size={18} />
-              ) : (
-                <AiOutlineHeart size={18} />
-              )}
-              {likeCnt}
-            </span>
-          </LabelWrapper>
-          <LabelWrapper>
-            <Grade clicked={getStarfromRate(reviewRate)} size={15} />
-          </LabelWrapper>
-          <LabelWrapper>
-            <h2>{productNm}</h2>
-          </LabelWrapper>
-          <br />
-          <LabelWrapper>
-            <span>{review}</span>
-          </LabelWrapper>
-          <br />
+          <FlexContainer>
+            <div>
+              <Like onClick={() => clickLikeBtn(id)}>
+                <i>
+                  {isClicked ? (
+                    <AiFillHeart color="red" size={18} />
+                  ) : (
+                    <AiOutlineHeart size={18} />
+                  )}
+                </i>
+                <span>{likeCnt}</span>
+              </Like>
+              <i>
+                <Grade clicked={getStarfromRate(reviewRate)} size={15} />
+              </i>
+            </div>
+            <AiOutlineShareAlt size={20} onClick={copy} />
+          </FlexContainer>
+          <h2>{productNm}</h2>
+          <p>{review}</p>
         </InfoContainer>
         <Comment />
       </ContentsContainer>
@@ -64,9 +66,8 @@ const DetailView = () => {
 
 const Wrapper = styled.div`
   width: 500px;
-  overflow-y: scroll;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 `;
 
 const ContentsContainer = styled.div`
@@ -75,16 +76,37 @@ const ContentsContainer = styled.div`
   width: 100%;
 `;
 
-const LabelWrapper = styled.div`
-  display: flex;
-`;
-
 const InfoContainer = styled.div`
   width: 100%;
-  padding: 16px;
+  padding: 40px 16px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  i div {
+    display: block;
+    margin: 20px 0;
+  }
+  h2 {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  p {
+    line-height: 20px;
+  }
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Like = styled.div`
+  i svg {
+    margin-bottom: -2px;
+    margin-right: 5px;
+  }
 `;
 
 export default DetailView;
