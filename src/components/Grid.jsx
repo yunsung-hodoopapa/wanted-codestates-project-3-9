@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { data } from '../model/data';
+import { useNavigate } from 'react-router';
 
 const defaultOption = {
   root: null,
@@ -13,7 +14,7 @@ const Grid = ({ dataList, setDataList }) => {
   const [target, setTarget] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [page, setPage] = useState(2);
-  console.log(dataList);
+  const navigate = useNavigate();
 
   const addItems = () => {
     if (dataList.length === data.length) {
@@ -24,6 +25,10 @@ const Grid = ({ dataList, setDataList }) => {
     setIsLoaded(true);
     // setDataList(data.slice(0, );
     setIsLoaded(false);
+  };
+
+  const moveDetailPage = id => {
+    navigate(`/detail/${id}`);
   };
 
   const onIntersect = ([entry], observer) => {
@@ -48,8 +53,9 @@ const Grid = ({ dataList, setDataList }) => {
     <Wrapper>
       <Items>
         {dataList.map((item, idx) => {
+          const { id } = item;
           return (
-            <li key={idx + 1}>
+            <li key={id} onClick={() => moveDetailPage(id)}>
               <img src={item.productImg[0]} />
             </li>
           );
