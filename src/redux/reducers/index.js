@@ -1,11 +1,10 @@
-// import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import { commentReducer } from './comment';
-// import { interactionReducer } from './interaction';
+import { interactionReducer } from './interaction';
 
 const rootReducer = combineReducers({
   comment: commentReducer,
-  // interaction: interactionReducer,
+  interaction: interactionReducer,
 });
 
 export default rootReducer;
