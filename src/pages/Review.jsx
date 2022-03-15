@@ -4,13 +4,29 @@ import Grade from '../components/Grade';
 import ReviewTitle from '../components/ReviewTitle';
 import ImageRegister from '../components/ImageRegister';
 const Review = () => {
+  /*
+  {
+    id: '1',
+    productNm: '블랙 핸드백',
+    productImg: [
+      'https://i.balaan.io/review/c836c897ce27f22497d14d8e9f461ece.webp',
+    ],
+    createDt: 1645401600,
+    review: '무난하게 데일리로 활용중입니다.',
+    reviewRate: 3,
+    likeCnt: 244,
+    comments: [],
+  },
+  */
   const [data, setData] = useState({
     clicked: [false, false, false, false, false],
+    likeCnt: 0,
+    comments: [],
   });
   const changeTitle = ({ target }) =>
-    setData({ ...data, ...{ title: target.value } });
+    setData({ ...data, ...{ productNm: target.value } });
   const changeContent = ({ target }) =>
-    setData({ ...data, ...{ content: target.value } });
+    setData({ ...data, ...{ review: target.value } });
   const changePhoto = image => setData({ ...data, ...{ productImg: image } });
 
   const handleStarClick = index => {
@@ -20,7 +36,23 @@ const Review = () => {
     }
     setData({ ...data, ...{ clicked: clickStates } });
   };
-  console.log(data);
+
+  const registerReview = () => {
+    let clickStates = data.clicked.filter(isSelected => isSelected).length;
+    const newData = { ...data };
+    delete newData.clicked;
+    // 데이터상태를 맞추기위해 기존의 `clicked` key값을 제거한 상태
+
+    console.log({
+      ...newData,
+      ...{ createDt: new Date().valueOf() },
+      ...{ reviewRate: clickStates },
+      ...{ id: Math.ceil(Math.random() * 10000000).toString() },
+    });
+
+    // Todo : dispatch로 상태 추가하고 navigate로 첫화면으로 옮기기
+  };
+
   return (
     <ReviewContainer>
       <ReviewTitle titleName={'제목'} />
@@ -28,14 +60,14 @@ const Review = () => {
         type="text"
         placeholder="리뷰 제목을 입력해주세요"
         onChange={changeTitle}
-        value={data?.title || ''}
+        value={data?.productNm || ''}
       ></TitleInput>
       <ReviewTitle titleName={'내용'} />
       <ContentArea
         type="text"
         placeholder="리뷰 내용을 입력해주세요"
         onChange={changeContent}
-        value={data?.content || ''}
+        value={data?.review || ''}
       ></ContentArea>
       <ImageRegister changePhoto={changePhoto} />
       <Grade
@@ -43,7 +75,7 @@ const Review = () => {
         clickGrade={index => handleStarClick(index)}
       />
       <SubmitContainer>
-        <SubmitBtn>리뷰 등록하기</SubmitBtn>
+        <SubmitBtn onClick={registerReview}>리뷰 등록하기</SubmitBtn>
       </SubmitContainer>
     </ReviewContainer>
   );
