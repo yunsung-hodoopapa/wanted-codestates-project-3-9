@@ -9,7 +9,7 @@ const List = ({ dataList }) => {
         {dataList.map((item, idx) => {
           return (
             <li key={idx + 1}>
-              <img src={item.productImg[0]} />
+              <img src={item.productImg[0]} alt={item.productNm} />
             </li>
           );
         })}
