@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { comment } from '../knkRedux/actions';
+import { comment } from '../redux/actions';
 
 // const comments = [
 //   {
@@ -22,8 +22,7 @@ import { comment } from '../knkRedux/actions';
 const Comment = () => {
   const dispatch = useDispatch();
   const inputText = useRef();
-  const data = useSelector(state => state.comment.data);
-  console.log(data);
+  const data = useSelector(state => state.comment);
   const matchData = id => data?.filter(item => item.id === id);
   const commentData = matchData('373189c2-9ab8-11ec-b909-0242ac120002')[0]
     .comments;
@@ -67,6 +66,7 @@ const Comment = () => {
 const Wrap = styled.div`
   background-color: #eee;
   padding-bottom: 10px;
+  width: 100%;
 `;
 
 const CommentUl = styled.ul`

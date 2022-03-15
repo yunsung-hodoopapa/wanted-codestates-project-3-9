@@ -25,7 +25,7 @@ const Review = () => {
   },
   */
   const [data, setData] = useState({
-    clicked: [false, false, false, false, false],
+    clicked: [true, false, false, false, false],
     likeCnt: 0,
     comments: [],
   });
@@ -86,9 +86,12 @@ const Review = () => {
         value={data?.review || ''}
       ></ContentArea>
       <ImageRegister changePhoto={changePhoto} />
+      <ReviewTitle title={'평점'} />
       <Grade
         clicked={data.clicked}
         clickGrade={index => handleStarClick(index)}
+        onClickCheck={true}
+        hoverAbled={true}
       />
       <SubmitContainer>
         <SubmitBtn onClick={registerReview}>리뷰 등록하기</SubmitBtn>

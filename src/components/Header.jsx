@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HeaderComponent = styled.header`
   width: 100%;
@@ -33,13 +32,13 @@ const Header = () => {
   return (
     <>
       <HeaderComponent>
-        {/* <Link to="/"> */}
-        <img
-          src="https://i.balaan.io/mobile/img/icon/ico_logo.png"
-          alt="logo"
-        />
-        {/* </Link> */}
-        <button onClick={() => navigate('/review')}>리뷰등록</button>
+        <Link to="/">
+          <img
+            src="https://i.balaan.io/mobile/img/icon/ico_logo.png"
+            alt="logo"
+          />
+        </Link>
+        <button>리뷰등록</button>
       </HeaderComponent>
     </>
   );
