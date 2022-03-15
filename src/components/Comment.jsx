@@ -9,14 +9,15 @@ const Comment = ({ id }) => {
   const dispatch = useDispatch();
   const inputText = useRef();
   const commentData = useSelector(state => state.comment);
-  const nowDate = new Date().getTime();
 
   const addComment = () => {
+    const nowDate = new Date().getTime();
     dispatch(comment(id, 'userId', inputText.current.value, nowDate));
     inputText.current.value = '';
   };
 
   const elapsedTime = date => {
+    const nowDate = new Date().getTime();
     const elapsedMSec = Math.floor((nowDate - date) / 1000);
     const elapsedMin = Math.floor(elapsedMSec / 60);
     const elapsedHour = Math.floor(elapsedMin / 60);
