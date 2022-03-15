@@ -11,6 +11,7 @@ const Review = () => {
     setData({ ...data, ...{ title: target.value } });
   const changeContent = ({ target }) =>
     setData({ ...data, ...{ content: target.value } });
+  const changePhoto = image => setData({ ...data, ...{ productImg: image } });
 
   const handleStarClick = index => {
     let clickStates = [...data.clicked];
@@ -36,7 +37,7 @@ const Review = () => {
         onChange={changeContent}
         value={data?.content || ''}
       ></ContentArea>
-      <ImageRegister />
+      <ImageRegister changePhoto={changePhoto} />
       <Grade
         clicked={data.clicked}
         clickGrade={index => handleStarClick(index)}

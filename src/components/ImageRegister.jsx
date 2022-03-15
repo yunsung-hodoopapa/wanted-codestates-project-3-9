@@ -1,19 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const ImageRegister = () => {
-  const [image, setImage] = useState(null);
+const ImageRegister = ({ changePhoto }) => {
+  const [image, setImage] = useState(null); // 미리보기 이미지
+  const reader = new FileReader();
   const handleImage = e => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setImage(reader.result);
+      changePhoto(reader.result);
+    };
+    e.target.value = ''; // reset 해주지 않으면 지운뒤 같은 사진을 업로드 하려고 할 때 onchange 이벤트가 발생하지 않는다.
   };
-  console.log(image);
   return (
     <div>
       {image ? (
         <ImageConatiner>
-          <img width="500px" height="500px" src={image} />{' '}
+          <X
+            onClick={() => {
+              setImage(null);
+              changePhoto(null);
+            }}
+          >
+            &times;
+          </X>
+          <img width="480px" height="480px" src={image} />
         </ImageConatiner>
       ) : null}
       <Label>
@@ -32,7 +45,9 @@ const ImageRegister = () => {
   );
 };
 
-// ImageRegister.propTypes = {};
+ImageRegister.propTypes = {
+  changePhoto: PropTypes.func,
+};
 
 const Label = styled.label`
   display: grid;
@@ -54,11 +69,16 @@ const UploadButton = styled.div`
 `;
 
 const ImageConatiner = styled.div`
-  margin: 0 auto;
-  border: 2px solid black;
   text-align: center;
-  width: 500px;
-  height: 500px;
+  width: 480px;
+  height: 480px;
+`;
+
+const X = styled.span`
+  position: absolute;
+  margin: 10px;
+  font-size: 30px;
+  cursor: pointer;
 `;
 
 export default ImageRegister;
